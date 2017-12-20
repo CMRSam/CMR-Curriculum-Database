@@ -1,0 +1,225 @@
+﻿@model CMR_Curriculum_Database.Models.content
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module_Name___CURRENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module_Name___CURRENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module_Name___PREVIOUS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module_Name___PREVIOUS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Introduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Introduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Objectives)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Objectives)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audio_Talent_used)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audio_Talent_used)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTIVE_ON_WEBSITE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACTIVE_ON_WEBSITE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Allowed_for_ASM_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allowed_for_ASM_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAIE_Modules)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAIE_Modules)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Search_Tagging)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Search_Tagging)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Industry_Tagging___FOR_WEBSITE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Industry_Tagging___FOR_WEBSITE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resources_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resources_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delivered_In_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delivered_In_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resource_Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resource_Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___Rep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___Rep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___DM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___DM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___Account_Manager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___Account_Manager)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Training_Planner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Training_Planner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Revision_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Revision_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Related_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Related_Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passing_Score_changed_to_80_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passing_Score_changed_to_80_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Writer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Writer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACPE_Module)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACPE_Module)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

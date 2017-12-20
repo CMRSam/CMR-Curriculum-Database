@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>CMR Curriculum Database</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <div>
+            @Html.ActionLink("List of Content", "Index", "content/Index")<br />
+            @Html.ActionLink("List of Companies", "Index", "company_list")<br />
+            @Html.ActionLink("List of Company Affiliations", "Index", "company_map")<br />
+            @Html.ActionLink("List of Categories", "Index", "categories")<br />
+            @Html.ActionLink("List of Parent Courses", "Index", "parent_course")
+        </div>
+</div>

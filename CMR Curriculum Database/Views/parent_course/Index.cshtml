@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CMR_Curriculum_Database.Models.parent_course>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Parent_Course_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parent_Course_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Parent_Course_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Parent_Course_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Parent_Course_ID })
+        </td>
+    </tr>
+}
+
+</table>

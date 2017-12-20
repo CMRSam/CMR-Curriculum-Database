@@ -1,0 +1,293 @@
+﻿@model CMR_Curriculum_Database.Models.content
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>content</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var pc in Model.parent_course_map)
+        {
+        <dt>
+            Parent Course
+        </dt>
+        <dd>
+            @Html.ActionLink(Html.DisplayFor(model => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.Parent_Course_ID })
+        </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module_Name___CURRENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module_Name___CURRENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Module_Name___PREVIOUS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Module_Name___PREVIOUS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Introduction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Introduction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Objectives)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Objectives)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Audio_Talent_used)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Audio_Talent_used)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTIVE_ON_WEBSITE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACTIVE_ON_WEBSITE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Allowed_for_ASM_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Allowed_for_ASM_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAIE_Modules)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAIE_Modules)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Search_Tagging)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Search_Tagging)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Industry_Tagging___FOR_WEBSITE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Industry_Tagging___FOR_WEBSITE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resources_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resources_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Delivered_In_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Delivered_In_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resource_Duration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resource_Duration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___Rep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___Rep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___DM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___DM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role___Account_Manager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role___Account_Manager)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Training_Planner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Training_Planner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Last_Revision_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Last_Revision_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Related_Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Related_Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passing_Score_changed_to_80_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passing_Score_changed_to_80_)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Writer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Writer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACPE_Module)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACPE_Module)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID })
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Categories
+            </th>
+        </tr>
+
+        @foreach (var item in Model.category_map)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category.Category1)
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+    <button>
+            @Html.ActionLink("Add category", "../category_map/Create", new { id = Model.ContentID })
+    </button>
+        </p>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Program
+            </th>
+            <th>
+                Delivery Method
+            </th>
+            <th>
+                Notes
+            </th>
+        </tr>
+        
+
+        @foreach (var item in Model.company_map)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.company_list.Company_Name).ToHtmlString(), "../company_list/Details", new {id = item.CompanyID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company_list.Program)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company_list.Delivery_Method)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.company_list.Notes)
+                </td>
+            </tr>
+        }
+    </table>
+    
+</div>
+<p>
+<button>
+    @Html.ActionLink("Add a company association", "../company_map/Create", new { id = Model.ContentID })
+</button>
+</p>
+<p>
+    @Html.ActionLink("Back to List", "../content/Index")
+</p>

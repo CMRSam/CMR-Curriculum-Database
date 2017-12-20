@@ -1,0 +1,34 @@
+﻿@model CMR_Curriculum_Database.Models.company_map
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>company_map</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.company_list.Company_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company_list.Company_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.content.Parent_Course_Name__if_applicable_)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.content.Parent_Course_Name__if_applicable_)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyMapID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="trm_cmridev16Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cmri_mip16_offerings">
+          <Key>
+            <PropertyRef Name="oID" />
+          </Key>
+          <Property Name="oID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent Course" Type="varchar" MaxLength="255" />
+          <Property Name="Module Name - CURRENT" Type="varchar" MaxLength="255" />
+          <Property Name="Module Name - PREVIOUS" Type="varchar" MaxLength="255" />
+          <Property Name="Introduction" Type="mediumtext" />
+          <Property Name="Objectives" Type="mediumtext" />
+          <Property Name="Audio Talent used" Type="varchar" MaxLength="255" />
+          <Property Name="ACTIVE ON WEBSITE" Type="int" />
+          <Property Name="Bonnie's Notes" Type="mediumtext" />
+          <Property Name="Allowed for ASM?" Type="varchar" MaxLength="25" />
+          <Property Name="MAIE Modules" Type="varchar" MaxLength="25" />
+          <Property Name="Main Category 1" Type="varchar" MaxLength="255" />
+          <Property Name="Subcategory" Type="varchar" MaxLength="255" />
+          <Property Name="Main Category 2" Type="varchar" MaxLength="255" />
+          <Property Name="Subcategory of 2" Type="varchar" MaxLength="255" />
+          <Property Name="Main Category 3" Type="varchar" MaxLength="255" />
+          <Property Name="Sub of 3" Type="varchar" MaxLength="255" />
+          <Property Name="Search Tagging" Type="varchar" MaxLength="255" />
+          <Property Name="Industry Tagging - FOR WEBSITE" Type="varchar" MaxLength="50" />
+          <Property Name="Resources Type" Type="varchar" MaxLength="100" />
+          <Property Name="Delivered In?" Type="varchar" MaxLength="255" />
+          <Property Name="Resource Duration" Type="varchar" MaxLength="100" />
+          <Property Name="Level" Type="varchar" MaxLength="255" />
+          <Property Name="Role - Rep" Type="varchar" MaxLength="255" />
+          <Property Name="Role - DM" Type="varchar" MaxLength="255" />
+          <Property Name="Role - Account Manager" Type="varchar" MaxLength="255" />
+          <Property Name="Training Planner" Type="varchar" MaxLength="50" />
+          <Property Name="Last Revision Date" Type="text" />
+          <Property Name="Related Content" Type="varchar" MaxLength="255" />
+          <Property Name="Passing Score changed to 80%" Type="varchar" MaxLength="20" />
+          <Property Name="Writer" Type="varchar" MaxLength="255" />
+          <Property Name="SME" Type="varchar" MaxLength="255" />
+          <Property Name="Chicago Approved" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ACPE Module" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="Company ID" />
+          </Key>
+          <Property Name="Company ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company Name" Type="varchar" MaxLength="255" />
+          <Property Name="Delivery Method" Type="varchar" MaxLength="255" />
+          <Property Name="Program" Type="varchar" MaxLength="255" />
+          <Property Name="Notes" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="company map">
+          <Key>
+            <PropertyRef Name="CompanyMapID" />
+          </Key>
+          <Property Name="CompanyMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FKCompany">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="company map" Type="Self.company map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="Company ID" />
+            </Principal>
+            <Dependent Role="company map">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOfferings">
+          <End Role="cmri_mip16_offerings" Type="Self.cmri_mip16_offerings" Multiplicity="1" />
+          <End Role="company map" Type="Self.company map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cmri_mip16_offerings">
+              <PropertyRef Name="oID" />
+            </Principal>
+            <Dependent Role="company map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="trm_cmridev16ModelStoreContainer">
+          <EntitySet Name="cmri_mip16_offerings" EntityType="Self.cmri_mip16_offerings" Schema="trm_cmridev16" store:Type="Tables" />
+          <EntitySet Name="company" EntityType="Self.company" Schema="trm_cmridev16" store:Type="Tables" />
+          <EntitySet Name="company map" EntityType="Self.company map" Schema="trm_cmridev16" store:Type="Tables" />
+          <AssociationSet Name="FKCompany" Association="Self.FKCompany">
+            <End Role="company" EntitySet="company" />
+            <End Role="company map" EntitySet="company map" />
+          </AssociationSet>
+          <AssociationSet Name="FKOfferings" Association="Self.FKOfferings">
+            <End Role="cmri_mip16_offerings" EntitySet="cmri_mip16_offerings" />
+            <End Role="company map" EntitySet="company map" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="trm_cmridev16Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cmri_mip16_offerings">
+          <Key>
+            <PropertyRef Name="oID" />
+          </Key>
+          <Property Name="oID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent_Course" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Name___CURRENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Name___PREVIOUS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Introduction" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="Objectives" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="Audio_Talent_used" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE_ON_WEBSITE" Type="Int32" />
+          <Property Name="Bonnie_s_Notes" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+          <Property Name="Allowed_for_ASM_" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MAIE_Modules" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Category_1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subcategory" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Category_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subcategory_of_2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Main_Category_3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_of_3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Search_Tagging" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Industry_Tagging___FOR_WEBSITE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resources_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Delivered_In_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Resource_Duration" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___Rep" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___DM" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___Account_Manager" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Training_Planner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Revision_Date" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Related_Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Passing_Score_changed_to_80_" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Writer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Chicago_Approved" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ACPE_Module" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="company_map" Relationship="Self.FKOfferings" FromRole="cmri_mip16_offerings" ToRole="company_map" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="Company_ID" />
+          </Key>
+          <Property Name="Company_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Delivery_Method" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Program" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="company_map" Relationship="Self.FKCompany" FromRole="company" ToRole="company_map" />
+        </EntityType>
+        <EntityType Name="company_map">
+          <Key>
+            <PropertyRef Name="CompanyMapID" />
+          </Key>
+          <Property Name="CompanyMapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cmri_mip16_offerings" Relationship="Self.FKOfferings" FromRole="company_map" ToRole="cmri_mip16_offerings" />
+          <NavigationProperty Name="company" Relationship="Self.FKCompany" FromRole="company_map" ToRole="company" />
+        </EntityType>
+        <Association Name="FKOfferings">
+          <End Role="cmri_mip16_offerings" Type="Self.cmri_mip16_offerings" Multiplicity="1" />
+          <End Role="company_map" Type="Self.company_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cmri_mip16_offerings">
+              <PropertyRef Name="oID" />
+            </Principal>
+            <Dependent Role="company_map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompany">
+          <End Role="company" Type="Self.company" Multiplicity="1" />
+          <End Role="company_map" Type="Self.company_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="Company_ID" />
+            </Principal>
+            <Dependent Role="company_map">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="trm_cmridev16Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cmri_mip16_offerings" EntityType="Self.cmri_mip16_offerings" />
+          <EntitySet Name="companies" EntityType="Self.company" />
+          <EntitySet Name="company_maps" EntityType="Self.company_map" />
+          <AssociationSet Name="FKOfferings" Association="Self.FKOfferings">
+            <End Role="cmri_mip16_offerings" EntitySet="cmri_mip16_offerings" />
+            <End Role="company_map" EntitySet="company_maps" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompany" Association="Self.FKCompany">
+            <End Role="company" EntitySet="companies" />
+            <End Role="company_map" EntitySet="company_maps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="trm_cmridev16ModelStoreContainer" CdmEntityContainer="trm_cmridev16Entities1">
+          <EntitySetMapping Name="cmri_mip16_offerings">
+            <EntityTypeMapping TypeName="trm_cmridev16Model.cmri_mip16_offerings">
+              <MappingFragment StoreEntitySet="cmri_mip16_offerings">
+                <ScalarProperty Name="oID" ColumnName="oID" />
+                <ScalarProperty Name="Parent_Course" ColumnName="Parent Course" />
+                <ScalarProperty Name="Module_Name___CURRENT" ColumnName="Module Name - CURRENT" />
+                <ScalarProperty Name="Module_Name___PREVIOUS" ColumnName="Module Name - PREVIOUS" />
+                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+                <ScalarProperty Name="Objectives" ColumnName="Objectives" />
+                <ScalarProperty Name="Audio_Talent_used" ColumnName="Audio Talent used" />
+                <ScalarProperty Name="ACTIVE_ON_WEBSITE" ColumnName="ACTIVE ON WEBSITE" />
+                <ScalarProperty Name="Bonnie_s_Notes" ColumnName="Bonnie's Notes" />
+                <ScalarProperty Name="Allowed_for_ASM_" ColumnName="Allowed for ASM?" />
+                <ScalarProperty Name="MAIE_Modules" ColumnName="MAIE Modules" />
+                <ScalarProperty Name="Main_Category_1" ColumnName="Main Category 1" />
+                <ScalarProperty Name="Subcategory" ColumnName="Subcategory" />
+                <ScalarProperty Name="Main_Category_2" ColumnName="Main Category 2" />
+                <ScalarProperty Name="Subcategory_of_2" ColumnName="Subcategory of 2" />
+                <ScalarProperty Name="Main_Category_3" ColumnName="Main Category 3" />
+                <ScalarProperty Name="Sub_of_3" ColumnName="Sub of 3" />
+                <ScalarProperty Name="Search_Tagging" ColumnName="Search Tagging" />
+                <ScalarProperty Name="Industry_Tagging___FOR_WEBSITE" ColumnName="Industry Tagging - FOR WEBSITE" />
+                <ScalarProperty Name="Resources_Type" ColumnName="Resources Type" />
+                <ScalarProperty Name="Delivered_In_" ColumnName="Delivered In?" />
+                <ScalarProperty Name="Resource_Duration" ColumnName="Resource Duration" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Role___Rep" ColumnName="Role - Rep" />
+                <ScalarProperty Name="Role___DM" ColumnName="Role - DM" />
+                <ScalarProperty Name="Role___Account_Manager" ColumnName="Role - Account Manager" />
+                <ScalarProperty Name="Training_Planner" ColumnName="Training Planner" />
+                <ScalarProperty Name="Last_Revision_Date" ColumnName="Last Revision Date" />
+                <ScalarProperty Name="Related_Content" ColumnName="Related Content" />
+                <ScalarProperty Name="Passing_Score_changed_to_80_" ColumnName="Passing Score changed to 80%" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="SME" ColumnName="SME" />
+                <ScalarProperty Name="Chicago_Approved" ColumnName="Chicago Approved" />
+                <ScalarProperty Name="ACPE_Module" ColumnName="ACPE Module" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companies">
+            <EntityTypeMapping TypeName="trm_cmridev16Model.company">
+              <MappingFragment StoreEntitySet="company">
+                <ScalarProperty Name="Company_ID" ColumnName="Company ID" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="Delivery_Method" ColumnName="Delivery Method" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_maps">
+            <EntityTypeMapping TypeName="trm_cmridev16Model.company_map">
+              <MappingFragment StoreEntitySet="company map">
+                <ScalarProperty Name="CompanyMapID" ColumnName="CompanyMapID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

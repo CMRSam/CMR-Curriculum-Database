@@ -1,0 +1,218 @@
+﻿@model IEnumerable<CMR_Curriculum_Database.Models.content>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Search Content: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            Parent Course
+        </th>
+        <th>
+            Module Name - CURRENT
+        </th>
+        <th>
+            Module Name - PREVIOUS
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.Introduction)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objectives)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Audio_Talent_used)
+        </th>
+        -->
+        <th>
+            Active on Website
+        </th>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Allowed_for_ASM_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MAIE_Modules)
+        </th>
+         -->
+        <th>
+            Main Category
+        </th>
+        <th>
+            Subcategory
+        </th>
+        <th>
+            Resource Type
+        </th>
+        <!--
+        
+            
+        <th>
+            @Html.DisplayNameFor(model => model.Search_Tagging)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Industry_Tagging___FOR_WEBSITE)
+        </th>
+        -->
+        
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.Delivered_In_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resource_Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role___Rep)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role___DM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role___Account_Manager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Training_Planner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Last_Revision_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Related_Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Passing_Score_changed_to_80_)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Writer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ACPE_Module)
+        </th>
+            -->
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        @foreach (var pc in item.parent_course_map)
+        {
+        <td>
+            @Html.ActionLink(Html.DisplayFor(modelItem => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.parent_course.Parent_Course_ID })
+        </td>
+        }
+        <td>
+            @Html.ActionLink(Html.DisplayFor(modelItem => item.Module_Name___CURRENT).ToHtmlString(), "Details", new { id=item.ContentID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module_Name___PREVIOUS)
+        </td>
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.Introduction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objectives)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Audio_Talent_used)
+        </td>
+        -->
+        <td>
+            @Html.DisplayFor(modelItem => item.ACTIVE_ON_WEBSITE)
+        </td>
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Allowed_for_ASM_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MAIE_Modules)
+        </td>
+        -->
+        <td>
+            @Html.DisplayFor(modelItem => item.Resources_Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Search_Tagging)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Industry_Tagging___FOR_WEBSITE)
+        </td>
+        
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.Delivered_In_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resource_Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role___Rep)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role___DM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role___Account_Manager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Training_Planner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Last_Revision_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Related_Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Passing_Score_changed_to_80_)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Writer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ACPE_Module)
+        </td>
+            -->
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
+             
+            @Html.ActionLink("Delete", "Delete", new { id=item.ContentID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="curriculumModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="category_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="Category ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company map">
+          <Key>
+            <PropertyRef Name="CompanyMapID" />
+          </Key>
+          <Property Name="CompanyMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ContentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="company_list">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company Name" Type="varchar" MaxLength="32" />
+          <Property Name="Delivery Method" Type="varchar" MaxLength="16" />
+          <Property Name="Program" Type="varchar" MaxLength="65" />
+          <Property Name="Notes" Type="varchar" MaxLength="79" />
+        </EntityType>
+        <EntityType Name="content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Module Name - CURRENT" Type="varchar" MaxLength="255" />
+          <Property Name="Module Name - PREVIOUS" Type="varchar" MaxLength="195" />
+          <Property Name="Introduction" Type="varchar" MaxLength="999" />
+          <Property Name="Objectives" Type="varchar" MaxLength="1135" />
+          <Property Name="Audio Talent used" Type="varchar" MaxLength="255" />
+          <Property Name="ACTIVE ON WEBSITE" Type="varchar" MaxLength="7" />
+          <Property Name="Notes" Type="varchar" MaxLength="255" />
+          <Property Name="Allowed for ASM?" Type="varchar" MaxLength="3" />
+          <Property Name="MAIE Modules" Type="varchar" MaxLength="3" />
+          <Property Name="Search Tagging" Type="varchar" MaxLength="255" />
+          <Property Name="Industry Tagging - FOR WEBSITE" Type="varchar" MaxLength="255" />
+          <Property Name="Resources Type" Type="varchar" MaxLength="255" />
+          <Property Name="Delivered In?" Type="varchar" MaxLength="255" />
+          <Property Name="Resource Duration" Type="varchar" MaxLength="255" />
+          <Property Name="Level" Type="varchar" MaxLength="255" />
+          <Property Name="Role - Rep" Type="varchar" MaxLength="255" />
+          <Property Name="Role - DM" Type="varchar" MaxLength="255" />
+          <Property Name="Role - Account Manager" Type="varchar" MaxLength="255" />
+          <Property Name="Training Planner" Type="varchar" MaxLength="255" />
+          <Property Name="Last Revision Date" Type="varchar" MaxLength="255" />
+          <Property Name="Related Content" Type="varchar" MaxLength="255" />
+          <Property Name="Passing Score changed to 80%" Type="varchar" MaxLength="255" />
+          <Property Name="Writer" Type="varchar" MaxLength="255" />
+          <Property Name="SME" Type="varchar" MaxLength="255" />
+          <Property Name="ACPE Module" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="parent course">
+          <Key>
+            <PropertyRef Name="Parent Course ID" />
+          </Key>
+          <Property Name="Parent Course ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent Course Name" Type="varchar" MaxLength="99" />
+        </EntityType>
+        <EntityType Name="parent_course_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent Course ID" Type="int" Nullable="false" />
+          <Property Name="Module ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="category_map_ibfk_1">
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="category_map" Type="Self.category_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="category_map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCategory">
+          <End Role="category" Type="Self.category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="category_map" Type="Self.category_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="category_map">
+              <PropertyRef Name="Category ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompany">
+          <End Role="company_list" Type="Self.company_list" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="company map" Type="Self.company map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company_list">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="company map">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKContent">
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="company map" Type="Self.company map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="company map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parent_course_map_ibfk_1">
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="parent_course_map" Type="Self.parent_course_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="parent_course_map">
+              <PropertyRef Name="Module ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parent_course_map_ibfk_2">
+          <End Role="parent course" Type="Self.parent course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="parent_course_map" Type="Self.parent_course_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parent course">
+              <PropertyRef Name="Parent Course ID" />
+            </Principal>
+            <Dependent Role="parent_course_map">
+              <PropertyRef Name="Parent Course ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="curriculumModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="category_map" EntityType="Self.category_map" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="company map" EntityType="Self.company map" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="company_list" EntityType="Self.company_list" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="content" EntityType="Self.content" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="parent course" EntityType="Self.parent course" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="parent_course_map" EntityType="Self.parent_course_map" Schema="curriculum" store:Type="Tables" />
+          <AssociationSet Name="category_map_ibfk_1" Association="Self.category_map_ibfk_1">
+            <End Role="content" EntitySet="content" />
+            <End Role="category_map" EntitySet="category_map" />
+          </AssociationSet>
+          <AssociationSet Name="FKCategory" Association="Self.FKCategory">
+            <End Role="category" EntitySet="category" />
+            <End Role="category_map" EntitySet="category_map" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompany" Association="Self.FKCompany">
+            <End Role="company_list" EntitySet="company_list" />
+            <End Role="company map" EntitySet="company map" />
+          </AssociationSet>
+          <AssociationSet Name="FKContent" Association="Self.FKContent">
+            <End Role="content" EntitySet="content" />
+            <End Role="company map" EntitySet="company map" />
+          </AssociationSet>
+          <AssociationSet Name="parent_course_map_ibfk_1" Association="Self.parent_course_map_ibfk_1">
+            <End Role="content" EntitySet="content" />
+            <End Role="parent_course_map" EntitySet="parent_course_map" />
+          </AssociationSet>
+          <AssociationSet Name="parent_course_map_ibfk_2" Association="Self.parent_course_map_ibfk_2">
+            <End Role="parent course" EntitySet="parent course" />
+            <End Role="parent_course_map" EntitySet="parent_course_map" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="curriculumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="curriculumEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="curriculumModel.category" />
+          <EntitySet Name="category_map" EntityType="curriculumModel.category_map" />
+          <EntitySet Name="company_maps" EntityType="curriculumModel.company_map" />
+          <EntitySet Name="company_list" EntityType="curriculumModel.company_list" />
+          <EntitySet Name="contents" EntityType="curriculumModel.content" />
+          <EntitySet Name="parent_courses" EntityType="curriculumModel.parent_course" />
+          <EntitySet Name="parent_course_map" EntityType="curriculumModel.parent_course_map" />
+          <AssociationSet Name="FKCategory" Association="curriculumModel.FKCategory">
+            <End Role="category" EntitySet="categories" />
+            <End Role="category_map" EntitySet="category_map" />
+          </AssociationSet>
+          <AssociationSet Name="category_map_ibfk_1" Association="curriculumModel.category_map_ibfk_1">
+            <End Role="content" EntitySet="contents" />
+            <End Role="category_map" EntitySet="category_map" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompany" Association="curriculumModel.FKCompany">
+            <End Role="company_list" EntitySet="company_list" />
+            <End Role="company_map" EntitySet="company_maps" />
+          </AssociationSet>
+          <AssociationSet Name="FKContent" Association="curriculumModel.FKContent">
+            <End Role="content" EntitySet="contents" />
+            <End Role="company_map" EntitySet="company_maps" />
+          </AssociationSet>
+          <AssociationSet Name="parent_course_map_ibfk_1" Association="curriculumModel.parent_course_map_ibfk_1">
+            <End Role="content" EntitySet="contents" />
+            <End Role="parent_course_map" EntitySet="parent_course_map" />
+          </AssociationSet>
+          <AssociationSet Name="parent_course_map_ibfk_2" Association="curriculumModel.parent_course_map_ibfk_2">
+            <End Role="parent_course" EntitySet="parent_courses" />
+            <End Role="parent_course_map" EntitySet="parent_course_map" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="category_map" Relationship="curriculumModel.FKCategory" FromRole="category" ToRole="category_map" />
+        </EntityType>
+        <EntityType Name="category_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <Property Name="Category_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="category" Relationship="curriculumModel.FKCategory" FromRole="category_map" ToRole="category" />
+          <NavigationProperty Name="content" Relationship="curriculumModel.category_map_ibfk_1" FromRole="category_map" ToRole="content" />
+        </EntityType>
+        <EntityType Name="company_map">
+          <Key>
+            <PropertyRef Name="CompanyMapID" />
+          </Key>
+          <Property Name="CompanyMapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="company_list" Relationship="curriculumModel.FKCompany" FromRole="company_map" ToRole="company_list" />
+          <NavigationProperty Name="content" Relationship="curriculumModel.FKContent" FromRole="company_map" ToRole="content" />
+        </EntityType>
+        <EntityType Name="company_list">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Delivery_Method" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Program" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="79" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="company_map" Relationship="curriculumModel.FKCompany" FromRole="company_list" ToRole="company_map" />
+        </EntityType>
+        <EntityType Name="content">
+          <Key>
+            <PropertyRef Name="ContentID" />
+          </Key>
+          <Property Name="ContentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Module_Name___CURRENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Module_Name___PREVIOUS" Type="String" MaxLength="195" FixedLength="false" Unicode="false" />
+          <Property Name="Introduction" Type="String" MaxLength="999" FixedLength="false" Unicode="false" />
+          <Property Name="Objectives" Type="String" MaxLength="1135" FixedLength="false" Unicode="false" />
+          <Property Name="Audio_Talent_used" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE_ON_WEBSITE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Allowed_for_ASM_" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="MAIE_Modules" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Search_Tagging" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Industry_Tagging___FOR_WEBSITE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Resources_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Delivered_In_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Resource_Duration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___Rep" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___DM" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Role___Account_Manager" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Training_Planner" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Revision_Date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Related_Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Passing_Score_changed_to_80_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Writer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ACPE_Module" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="category_map" Relationship="curriculumModel.category_map_ibfk_1" FromRole="content" ToRole="category_map" />
+          <NavigationProperty Name="company_map" Relationship="curriculumModel.FKContent" FromRole="content" ToRole="company_map" />
+          <NavigationProperty Name="parent_course_map" Relationship="curriculumModel.parent_course_map_ibfk_1" FromRole="content" ToRole="parent_course_map" />
+        </EntityType>
+        <EntityType Name="parent_course">
+          <Key>
+            <PropertyRef Name="Parent_Course_ID" />
+          </Key>
+          <Property Name="Parent_Course_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent_Course_Name" Type="String" MaxLength="99" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="parent_course_map" Relationship="curriculumModel.parent_course_map_ibfk_2" FromRole="parent_course" ToRole="parent_course_map" />
+        </EntityType>
+        <EntityType Name="parent_course_map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent_Course_ID" Type="Int32" Nullable="false" />
+          <Property Name="Module_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="content" Relationship="curriculumModel.parent_course_map_ibfk_1" FromRole="parent_course_map" ToRole="content" />
+          <NavigationProperty Name="parent_course" Relationship="curriculumModel.parent_course_map_ibfk_2" FromRole="parent_course_map" ToRole="parent_course" />
+        </EntityType>
+        <Association Name="FKCategory">
+          <End Type="curriculumModel.category" Role="category" Multiplicity="1" />
+          <End Type="curriculumModel.category_map" Role="category_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="category_map">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="category_map_ibfk_1">
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
+          <End Type="curriculumModel.category_map" Role="category_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="category_map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompany">
+          <End Type="curriculumModel.company_list" Role="company_list" Multiplicity="1" />
+          <End Type="curriculumModel.company_map" Role="company_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company_list">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="company_map">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKContent">
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
+          <End Type="curriculumModel.company_map" Role="company_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="company_map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parent_course_map_ibfk_1">
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
+          <End Type="curriculumModel.parent_course_map" Role="parent_course_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="parent_course_map">
+              <PropertyRef Name="Module_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="parent_course_map_ibfk_2">
+          <End Type="curriculumModel.parent_course" Role="parent_course" Multiplicity="1" />
+          <End Type="curriculumModel.parent_course_map" Role="parent_course_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="parent_course">
+              <PropertyRef Name="Parent_Course_ID" />
+            </Principal>
+            <Dependent Role="parent_course_map">
+              <PropertyRef Name="Parent_Course_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="curriculumModelStoreContainer" CdmEntityContainer="curriculumEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="curriculumModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="Category1" ColumnName="Category" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category_map">
+            <EntityTypeMapping TypeName="curriculumModel.category_map">
+              <MappingFragment StoreEntitySet="category_map">
+                <ScalarProperty Name="Category_ID" ColumnName="Category ID" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_maps">
+            <EntityTypeMapping TypeName="curriculumModel.company_map">
+              <MappingFragment StoreEntitySet="company map">
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyMapID" ColumnName="CompanyMapID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="company_list">
+            <EntityTypeMapping TypeName="curriculumModel.company_list">
+              <MappingFragment StoreEntitySet="company_list">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Delivery_Method" ColumnName="Delivery Method" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company Name" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contents">
+            <EntityTypeMapping TypeName="curriculumModel.content">
+              <MappingFragment StoreEntitySet="content">
+                <ScalarProperty Name="ACPE_Module" ColumnName="ACPE Module" />
+                <ScalarProperty Name="SME" ColumnName="SME" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Passing_Score_changed_to_80_" ColumnName="Passing Score changed to 80%" />
+                <ScalarProperty Name="Related_Content" ColumnName="Related Content" />
+                <ScalarProperty Name="Last_Revision_Date" ColumnName="Last Revision Date" />
+                <ScalarProperty Name="Training_Planner" ColumnName="Training Planner" />
+                <ScalarProperty Name="Role___Account_Manager" ColumnName="Role - Account Manager" />
+                <ScalarProperty Name="Role___DM" ColumnName="Role - DM" />
+                <ScalarProperty Name="Role___Rep" ColumnName="Role - Rep" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Resource_Duration" ColumnName="Resource Duration" />
+                <ScalarProperty Name="Delivered_In_" ColumnName="Delivered In?" />
+                <ScalarProperty Name="Resources_Type" ColumnName="Resources Type" />
+                <ScalarProperty Name="Industry_Tagging___FOR_WEBSITE" ColumnName="Industry Tagging - FOR WEBSITE" />
+                <ScalarProperty Name="Search_Tagging" ColumnName="Search Tagging" />
+                <ScalarProperty Name="MAIE_Modules" ColumnName="MAIE Modules" />
+                <ScalarProperty Name="Allowed_for_ASM_" ColumnName="Allowed for ASM?" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ACTIVE_ON_WEBSITE" ColumnName="ACTIVE ON WEBSITE" />
+                <ScalarProperty Name="Audio_Talent_used" ColumnName="Audio Talent used" />
+                <ScalarProperty Name="Objectives" ColumnName="Objectives" />
+                <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+                <ScalarProperty Name="Module_Name___PREVIOUS" ColumnName="Module Name - PREVIOUS" />
+                <ScalarProperty Name="Module_Name___CURRENT" ColumnName="Module Name - CURRENT" />
+                <ScalarProperty Name="ContentID" ColumnName="ContentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parent_courses">
+            <EntityTypeMapping TypeName="curriculumModel.parent_course">
+              <MappingFragment StoreEntitySet="parent course">
+                <ScalarProperty Name="Parent_Course_Name" ColumnName="Parent Course Name" />
+                <ScalarProperty Name="Parent_Course_ID" ColumnName="Parent Course ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="parent_course_map">
+            <EntityTypeMapping TypeName="curriculumModel.parent_course_map">
+              <MappingFragment StoreEntitySet="parent_course_map">
+                <ScalarProperty Name="Module_ID" ColumnName="Module ID" />
+                <ScalarProperty Name="Parent_Course_ID" ColumnName="Parent Course ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
