@@ -8,12 +8,13 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h4>Welcome @User.Identity.Name</h4>
         <div>
             @Html.ActionLink("List of Content", "Index", "content/Index")<br />
             @Html.ActionLink("List of Companies", "Index", "company_list")<br />
             @Html.ActionLink("List of Company Affiliations", "Index", "company_map")<br />
             @Html.ActionLink("List of Categories", "Index", "categories")<br />
-            @Html.ActionLink("List of Parent Courses", "Index", "parent_course")
+            @Html.ActionLink("List of Parent Courses", "Index", "parent_course")<br />
+            @Html.ActionLink("List of Parent Courses Associations", "Index", "parent_course_map")
         </div>
 </div>

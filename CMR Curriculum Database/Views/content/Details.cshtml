@@ -241,10 +241,8 @@
         }
     </table>
     <p>
-    <button>
-            @Html.ActionLink("Add category", "../category_map/Create", new { id = Model.ContentID })
-    </button>
-        </p>
+       @Html.ActionLink("Add category", "../category_map/Create", new { id = Model.ContentID })
+    </p>
     <br />
     <table class="table">
         <tr>
@@ -284,9 +282,7 @@
     
 </div>
 <p>
-<button>
     @Html.ActionLink("Add a company association", "../company_map/Create", new { id = Model.ContentID })
-</button>
 </p>
 <p>
     @Html.ActionLink("Back to List", "../content/Index")

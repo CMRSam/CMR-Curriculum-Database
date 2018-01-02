@@ -4,12 +4,19 @@
     ViewBag.Title = "Index";
 }
 
+@if(!User.Identity.IsAuthenticated)
+{
+    <h3>You must @Html.ActionLink("login", "../Account/Login") to view content</h3>
+}
+else
+{ 
+
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm())
+using (Html.BeginForm())
 {
     <p>
         Search Content: @Html.TextBox("SearchString")
@@ -216,3 +223,4 @@
 }
 
 </table>
+}
