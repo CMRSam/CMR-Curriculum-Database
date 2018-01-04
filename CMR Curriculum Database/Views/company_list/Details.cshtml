@@ -4,19 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2><strong>@Html.DisplayFor(model => model.Company_Name)</strong></h2>
 
 <div>
-    <h4>company_list</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Company_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company_Name)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Delivery_Method)
@@ -64,6 +56,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.content.Resources_Type)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "../company_map/Delete", new { id=item.CompanyMapID })
                 </td>
             </tr>
         }

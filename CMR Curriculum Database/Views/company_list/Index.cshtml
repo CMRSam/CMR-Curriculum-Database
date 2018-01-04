@@ -4,7 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2><strong>Companies/Certificate Programs</strong></h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 @using (Html.BeginForm())
 {
     <p>
@@ -12,9 +16,6 @@
         <input type="submit" value="Search" />
     </p>
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

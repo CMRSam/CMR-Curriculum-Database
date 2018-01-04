@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CMR_Curriculum_Database.Models;
+using System.Text;
+using System.Reflection;
 
 namespace CMR_Curriculum_Database.Controllers
 {
@@ -134,6 +136,50 @@ namespace CMR_Curriculum_Database.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public FileResult Mapping(string separator = ",")
+        {
+            StringBuilder builder = new StringBuilder();
+            string csv = string.Empty;
+            string[] catArray = {};
+            int i = 0;
+
+            var mapping = from c in db.content join cm in db.category_map on c.ContentID equals cm.ContentID
+                          join cat in db.categories on cm.Category_ID equals cat.CategoryID
+                          join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
+                          join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
+                          select new
+                          {
+                              name = c.Module_Name___CURRENT,
+                              cat = cat.Category1
+                          };
+
+            var categories = from categor in db.categories
+                             join catmap in db.category_map on categor.CategoryID equals catmap.Category_ID
+                             join con in db.content on catmap.ContentID equals con.ContentID
+                             select categor;
+
+            foreach (var category in categories)
+            {
+                catArray[i] = category.Category1;
+                ++i;
+            }
+
+            foreach (var content in mapping)
+            {
+                csv += content.name.Replace(",", ";") + ',';
+
+                for(int index = 0; i<catArray.Length;++i)
+                {
+                    csv += catArray[index].Replace(",", ";") + ',';
+                }
+                
+                csv += "\r\n";
+            }
+
+            byte[] bytes = Encoding.ASCII.GetBytes(csv);
+            return File(bytes, "application/text", "Catalog.csv");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\sharrison\Documents\DatabaseDev\DatabaseRedesign4\CMR Curriculum Database\CMR Curriculum Database\Models\CMRCurriculum.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\sharrison\Documents\Visual Studio 2015\Projects\CMR Curriculum Database\CMR Curriculum Database\Models\CMRCurriculum.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -48,7 +48,7 @@ namespace CMR_Curriculum_Database.Controllers
         }
 
         // GET: company_map/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
             ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
                                                 select new

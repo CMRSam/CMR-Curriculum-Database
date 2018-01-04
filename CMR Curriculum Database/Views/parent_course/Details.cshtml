@@ -4,21 +4,10 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2><strong>@Html.DisplayFor(model => model.Parent_Course_Name)</strong></h2>
 
 <div>
-    <h4>parent_course</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Parent_Course_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Parent_Course_Name)
-        </dd>
-
-    </dl>
+    
     <table class="table">
         <tr>
             <th>
@@ -31,6 +20,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "../parent_course_map/Delete", new { id=item.ID })
                 </td>
             </tr>
         }
