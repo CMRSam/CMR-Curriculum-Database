@@ -15,7 +15,7 @@
             Parent Course:
         </dt>
         <dd>
-            @Html.ActionLink(Html.DisplayFor(model => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.Parent_Course_ID })
+            @Html.ActionLink(Html.DisplayFor(model => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.Parent_Course_ID }) | @Html.ActionLink("Change", "../parent_course_map/Edit", new { id = pc.ID })
         </dd>
         }
         <dt>
@@ -191,7 +191,7 @@
     <table class="table">
         <tr>
             <th>
-                Categories
+                Categories:
             </th>
         </tr>
 
@@ -199,10 +199,10 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.category.Category1)
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.category.Category1).ToHtmlString(), "../categories/Details", new {id = item.CategoryID})
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "../category_map/Delete", new { id=item.ID })
+                    @Html.ActionLink("Remove", "../category_map/Delete", new { id=item.ID })
                 </td>
             </tr>
         }
@@ -245,7 +245,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Delete", "../company_map/Delete", new { id=item.CompanyMapID })
+                    @Html.ActionLink("Remove", "../company_map/Delete", new { id=item.CompanyMapID })
                 </td>
             </tr>
         }
@@ -253,7 +253,7 @@
     
 </div>
 <p>
-    @Html.ActionLink("Add a company association", "../company_map/Create", new { id = Model.ContentID })
+    @Html.ActionLink("Add a company association", "../company_list")
 </p>
 <p>
     @Html.ActionLink("Back to List", "../content/Index")

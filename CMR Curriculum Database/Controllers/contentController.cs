@@ -126,7 +126,7 @@ namespace CMR_Curriculum_Database.Controllers
             db.content.Remove(content);
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../content/Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -147,7 +147,7 @@ namespace CMR_Curriculum_Database.Controllers
                           join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
                           join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
                           join catmap in db.category_map on c.ContentID equals catmap.ContentID
-                          join categor in db.categories on catmap.Category_ID equals categor.CategoryID
+                          join categor in db.categories on catmap.CategoryID equals categor.CategoryID
                           select new
                           {
                               name = c.Module_Name___CURRENT,

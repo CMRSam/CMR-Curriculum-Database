@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CMR_Curriculum_Database.Models;
+using System.Web.UI;
 
 namespace CMR_Curriculum_Database.Controllers
 {
@@ -41,7 +42,7 @@ namespace CMR_Curriculum_Database.Controllers
         {
             content c = db.content.Find(id);
 
-            ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT", c.ContentID);
+            ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses.OrderBy(item => item.Parent_Course_Name), "Parent_Course_ID", "Parent_Course_Name");
             return View();
         }
@@ -57,12 +58,12 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 db.parent_course_map.Add(parent_course_map);
                 db.SaveChanges();
-                return RedirectToAction("../category_map/Create");
+                return RedirectToAction("../content/Index");
             }
 
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses, "Parent_Course_ID", "Parent_Course_Name", parent_course_map.Parent_Course_ID);
             ViewBag.Module_ID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", parent_course_map.Module_ID);
-            return View(parent_course_map);
+            return View();
         }
 
         // GET: parent_course_map/Edit/5
@@ -94,7 +95,8 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 db.Entry(parent_course_map).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                Response.Write("<script>alert('Parent Course has been successfully changed.')</script>");
             }
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses, "Parent_Course_ID", "Parent_Course_Name", parent_course_map.Parent_Course_ID);
             ViewBag.Module_ID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", parent_course_map.Module_ID);

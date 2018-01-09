@@ -27,6 +27,7 @@ namespace CMR_Curriculum_Database.Models
         public string Module_Name___PREVIOUS { get; set; }
         public string Introduction { get; set; }
         public string Objectives { get; set; }
+        public string In_Revision { get; set; }
         public string Audio_Talent_used { get; set; }
         public string ACTIVE_ON_WEBSITE { get; set; }
         public string Notes { get; set; }
@@ -43,9 +44,8 @@ namespace CMR_Curriculum_Database.Models
         public string Passing_Score_changed_to_80_ { get; set; }
         public string Writer { get; set; }
         public string SME { get; set; }
-        public string ACPE_Module { get; set; }
-        public string In_Revision { get; set; }
         public string Chicago_Approved { get; set; }
+        public string ACPE_Module { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<category_map> category_map { get; set; }

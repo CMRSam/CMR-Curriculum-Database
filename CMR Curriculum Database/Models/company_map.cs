@@ -18,7 +18,7 @@ namespace CMR_Curriculum_Database.Models
         public int CompanyID { get; set; }
         public int ContentID { get; set; }
     
-        public virtual company_list company_list { get; set; }
         public virtual content content { get; set; }
+        public virtual company_list company_list { get; set; }
     }
 }

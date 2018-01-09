@@ -16,7 +16,7 @@ namespace CMR_Curriculum_Database.Models
     {
         public int ID { get; set; }
         public int ContentID { get; set; }
-        public int Category_ID { get; set; }
+        public int CategoryID { get; set; }
     
         public virtual category category { get; set; }
         public virtual content content { get; set; }

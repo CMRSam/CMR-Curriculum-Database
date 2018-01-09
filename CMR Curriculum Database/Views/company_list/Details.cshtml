@@ -58,14 +58,14 @@
                     @Html.DisplayFor(modelItem => item.content.Resources_Type)
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "../company_map/Delete", new { id=item.CompanyMapID })
+                    @Html.ActionLink("Remove", "../company_map/Delete", new { id=item.CompanyMapID })
                 </td>
             </tr>
         }
     </table>
 </div>
 <p>
-    @Html.ActionLink("Add content to company", "../company_map/Create", new { id=Model.CompanyID })
+    @Html.ActionLink("Add content to company", "../company_map/Create", new { id=Model.CompanyID})
 </p>
 <p>
     @Html.ActionLink("Back to List", "Index")

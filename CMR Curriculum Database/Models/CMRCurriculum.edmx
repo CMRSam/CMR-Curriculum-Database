@@ -18,7 +18,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ContentID" Type="int" Nullable="false" />
-          <Property Name="Category ID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="company map">
           <Key>
@@ -106,12 +106,14 @@
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="category_map">
-              <PropertyRef Name="Category ID" />
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="company map_ibfk_1">
-          <End Role="content" Type="Self.content" Multiplicity="1" />
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="company map" Type="Self.company map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="content">
@@ -136,6 +138,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="parent_course_map_ibfk_1">
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="parent_course_map" Type="Self.parent_course_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="parent_course_map">
+              <PropertyRef Name="Module ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="parent_course_map_ibfk_2">
           <End Role="parent course" Type="Self.parent course" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -147,18 +163,6 @@
             </Principal>
             <Dependent Role="parent_course_map">
               <PropertyRef Name="Parent Course ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="parent_course_map_ibfk_3">
-          <End Role="content" Type="Self.content" Multiplicity="1" />
-          <End Role="parent_course_map" Type="Self.parent_course_map" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="content">
-              <PropertyRef Name="ContentID" />
-            </Principal>
-            <Dependent Role="parent_course_map">
-              <PropertyRef Name="Module ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,12 +190,12 @@
             <End Role="company_list" EntitySet="company_list" />
             <End Role="company map" EntitySet="company map" />
           </AssociationSet>
-          <AssociationSet Name="parent_course_map_ibfk_2" Association="Self.parent_course_map_ibfk_2">
-            <End Role="parent course" EntitySet="parent course" />
+          <AssociationSet Name="parent_course_map_ibfk_1" Association="Self.parent_course_map_ibfk_1">
+            <End Role="content" EntitySet="content" />
             <End Role="parent_course_map" EntitySet="parent_course_map" />
           </AssociationSet>
-          <AssociationSet Name="parent_course_map_ibfk_3" Association="Self.parent_course_map_ibfk_3">
-            <End Role="content" EntitySet="content" />
+          <AssociationSet Name="parent_course_map_ibfk_2" Association="Self.parent_course_map_ibfk_2">
+            <End Role="parent course" EntitySet="parent course" />
             <End Role="parent_course_map" EntitySet="parent_course_map" />
           </AssociationSet>
         </EntityContainer>
@@ -207,7 +211,7 @@
           <EntitySet Name="contents" EntityType="curriculumModel.content" />
           <EntitySet Name="parent_courses" EntityType="curriculumModel.parent_course" />
           <EntitySet Name="parent_course_map" EntityType="curriculumModel.parent_course_map" />
-          <AssociationSet Name="FKCategory" Association="curriculumModel.FKCategory">
+          <AssociationSet Name="category_map_ibfk_2" Association="curriculumModel.category_map_ibfk_2">
             <End Role="category" EntitySet="categories" />
             <End Role="category_map" EntitySet="category_map" />
           </AssociationSet>
@@ -215,12 +219,12 @@
             <End Role="content" EntitySet="contents" />
             <End Role="category_map" EntitySet="category_map" />
           </AssociationSet>
-          <AssociationSet Name="FKCompany" Association="curriculumModel.FKCompany">
-            <End Role="company_list" EntitySet="company_list" />
+          <AssociationSet Name="company_map_ibfk_1" Association="curriculumModel.company_map_ibfk_1">
+            <End Role="content" EntitySet="contents" />
             <End Role="company_map" EntitySet="company_maps" />
           </AssociationSet>
-          <AssociationSet Name="FKContent" Association="curriculumModel.FKContent">
-            <End Role="content" EntitySet="contents" />
+          <AssociationSet Name="FKCompany" Association="curriculumModel.FKCompany">
+            <End Role="company_list" EntitySet="company_list" />
             <End Role="company_map" EntitySet="company_maps" />
           </AssociationSet>
           <AssociationSet Name="parent_course_map_ibfk_1" Association="curriculumModel.parent_course_map_ibfk_1">
@@ -238,7 +242,7 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="category_map" Relationship="curriculumModel.FKCategory" FromRole="category" ToRole="category_map" />
+          <NavigationProperty Name="category_map" Relationship="curriculumModel.category_map_ibfk_2" FromRole="category" ToRole="category_map" />
         </EntityType>
         <EntityType Name="category_map">
           <Key>
@@ -246,8 +250,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ContentID" Type="Int32" Nullable="false" />
-          <Property Name="Category_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="category" Relationship="curriculumModel.FKCategory" FromRole="category_map" ToRole="category" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="category" Relationship="curriculumModel.category_map_ibfk_2" FromRole="category_map" ToRole="category" />
           <NavigationProperty Name="content" Relationship="curriculumModel.category_map_ibfk_1" FromRole="category_map" ToRole="content" />
         </EntityType>
         <EntityType Name="company_map">
@@ -257,8 +261,8 @@
           <Property Name="CompanyMapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="ContentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="content" Relationship="curriculumModel.company_map_ibfk_1" FromRole="company_map" ToRole="content" />
           <NavigationProperty Name="company_list" Relationship="curriculumModel.FKCompany" FromRole="company_map" ToRole="company_list" />
-          <NavigationProperty Name="content" Relationship="curriculumModel.FKContent" FromRole="company_map" ToRole="content" />
         </EntityType>
         <EntityType Name="company_list">
           <Key>
@@ -280,6 +284,7 @@
           <Property Name="Module_Name___PREVIOUS" Type="String" MaxLength="195" FixedLength="false" Unicode="false" />
           <Property Name="Introduction" Type="String" MaxLength="999" FixedLength="false" Unicode="false" />
           <Property Name="Objectives" Type="String" MaxLength="1135" FixedLength="false" Unicode="false" />
+          <Property Name="In_Revision" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Audio_Talent_used" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVE_ON_WEBSITE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -290,18 +295,17 @@
           <Property Name="Resources_Type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Delivered_In_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Resource_Duration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Level" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Last_Revision_Date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Related_Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Passing_Score_changed_to_80_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Writer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Chicago_Approved" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACPE_Module" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="category_map" Relationship="curriculumModel.category_map_ibfk_1" FromRole="content" ToRole="category_map" />
-          <NavigationProperty Name="company_map" Relationship="curriculumModel.FKContent" FromRole="content" ToRole="company_map" />
+          <NavigationProperty Name="company_map" Relationship="curriculumModel.company_map_ibfk_1" FromRole="content" ToRole="company_map" />
           <NavigationProperty Name="parent_course_map" Relationship="curriculumModel.parent_course_map_ibfk_1" FromRole="content" ToRole="parent_course_map" />
-          <Property Name="In_Revision" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Chicago_Approved" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="parent_course">
           <Key>
@@ -321,20 +325,24 @@
           <NavigationProperty Name="content" Relationship="curriculumModel.parent_course_map_ibfk_1" FromRole="parent_course_map" ToRole="content" />
           <NavigationProperty Name="parent_course" Relationship="curriculumModel.parent_course_map_ibfk_2" FromRole="parent_course_map" ToRole="parent_course" />
         </EntityType>
-        <Association Name="FKCategory">
-          <End Type="curriculumModel.category" Role="category" Multiplicity="1" />
+        <Association Name="category_map_ibfk_2">
+          <End Type="curriculumModel.category" Role="category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="curriculumModel.category_map" Role="category_map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="category">
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="category_map">
-              <PropertyRef Name="Category_ID" />
+              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="category_map_ibfk_1">
-          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="curriculumModel.category_map" Role="category_map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="content">
@@ -345,8 +353,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="company_map_ibfk_1">
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="curriculumModel.company_map" Role="company_map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="company_map">
+              <PropertyRef Name="ContentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKCompany">
-          <End Type="curriculumModel.company_list" Role="company_list" Multiplicity="1" />
+          <End Type="curriculumModel.company_list" Role="company_list" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="curriculumModel.company_map" Role="company_map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="company_list">
@@ -357,20 +381,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKContent">
-          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
-          <End Type="curriculumModel.company_map" Role="company_map" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="content">
-              <PropertyRef Name="ContentID" />
-            </Principal>
-            <Dependent Role="company_map">
-              <PropertyRef Name="ContentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="parent_course_map_ibfk_1">
-          <End Type="curriculumModel.content" Role="content" Multiplicity="1" />
+          <End Type="curriculumModel.content" Role="content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="curriculumModel.parent_course_map" Role="parent_course_map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="content">
@@ -382,7 +396,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="parent_course_map_ibfk_2">
-          <End Type="curriculumModel.parent_course" Role="parent_course" Multiplicity="1" />
+          <End Type="curriculumModel.parent_course" Role="parent_course" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="curriculumModel.parent_course_map" Role="parent_course_map" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="parent_course">
@@ -410,7 +426,7 @@
           <EntitySetMapping Name="category_map">
             <EntityTypeMapping TypeName="curriculumModel.category_map">
               <MappingFragment StoreEntitySet="category_map">
-                <ScalarProperty Name="Category_ID" ColumnName="Category ID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="ContentID" ColumnName="ContentID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -439,9 +455,8 @@
           <EntitySetMapping Name="contents">
             <EntityTypeMapping TypeName="curriculumModel.content">
               <MappingFragment StoreEntitySet="content">
-                <ScalarProperty Name="Chicago_Approved" ColumnName="Chicago Approved" />
-                <ScalarProperty Name="In_Revision" ColumnName="In Revision" />
                 <ScalarProperty Name="ACPE_Module" ColumnName="ACPE Module" />
+                <ScalarProperty Name="Chicago_Approved" ColumnName="Chicago Approved" />
                 <ScalarProperty Name="SME" ColumnName="SME" />
                 <ScalarProperty Name="Writer" ColumnName="Writer" />
                 <ScalarProperty Name="Passing_Score_changed_to_80_" ColumnName="Passing Score changed to 80%" />
@@ -458,6 +473,7 @@
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="ACTIVE_ON_WEBSITE" ColumnName="ACTIVE ON WEBSITE" />
                 <ScalarProperty Name="Audio_Talent_used" ColumnName="Audio Talent used" />
+                <ScalarProperty Name="In_Revision" ColumnName="In Revision" />
                 <ScalarProperty Name="Objectives" ColumnName="Objectives" />
                 <ScalarProperty Name="Introduction" ColumnName="Introduction" />
                 <ScalarProperty Name="Module_Name___PREVIOUS" ColumnName="Module Name - PREVIOUS" />

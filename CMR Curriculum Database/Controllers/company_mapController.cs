@@ -52,8 +52,9 @@ namespace CMR_Curriculum_Database.Controllers
         public ActionResult Create(int? id)
         {
             company_list cl = db.company_list.Find(id);
-            /*
-            ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
+            content c = db.content.Find(id);
+            
+            /*ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
                                                 select new
                                                 {
                                                     CompanyID = db.company_list.Find(id),

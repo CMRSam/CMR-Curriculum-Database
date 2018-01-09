@@ -67,7 +67,7 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 db.category_map.Add(category_map);
                 db.SaveChanges();
-                return RedirectToAction("./");
+                return RedirectToAction("../");
             }
 
             ViewBag.ContentList = new MultiSelectList(db.content, "ContentID", "Module_Name___CURRENT");
@@ -88,7 +88,7 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Category_ID = new SelectList(db.categories, "CategoryID", "Category1", category_map.Category_ID);
+            ViewBag.Category_ID = new SelectList(db.categories, "CategoryID", "Category1", category_map.CategoryID);
             ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", category_map.ContentID);
             return View(category_map);
         }
@@ -106,7 +106,7 @@ namespace CMR_Curriculum_Database.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Category_ID = new SelectList(db.categories, "CategoryID", "Category1", category_map.Category_ID);
+            ViewBag.Category_ID = new SelectList(db.categories, "CategoryID", "Category1", category_map.CategoryID);
             ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", category_map.ContentID);
             return View(category_map);
         }
@@ -134,7 +134,7 @@ namespace CMR_Curriculum_Database.Controllers
             category_map category_map = db.category_map.Find(id);
             db.category_map.Remove(category_map);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../content");
         }
 
         protected override void Dispose(bool disposing)
