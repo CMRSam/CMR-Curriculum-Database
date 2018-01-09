@@ -14,6 +14,8 @@ namespace CMR_Curriculum_Database.Controllers
     {
         private curriculumEntities db = new curriculumEntities();
 
+        public List<CheckBoxListItem> companies { get; set; }
+
         // GET: company_list
         public ActionResult Index(string searchString)
         {
@@ -63,6 +65,9 @@ namespace CMR_Curriculum_Database.Controllers
                 return RedirectToAction("Index");
             }
 
+            
+            companies = new List<CheckBoxListItem>();
+            
             return View(company_list);
         }
 

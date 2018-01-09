@@ -14,6 +14,7 @@ namespace CMR_Curriculum_Database.Controllers
     {
         private curriculumEntities db = new curriculumEntities();
 
+
         // GET: company_map
         public ActionResult Index()
         {
@@ -50,15 +51,18 @@ namespace CMR_Curriculum_Database.Controllers
         // GET: company_map/Create
         public ActionResult Create(int? id)
         {
+            company_list cl = db.company_list.Find(id);
+            /*
             ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
                                                 select new
                                                 {
-                                                    CompanyID = s.CompanyID,
+                                                    CompanyID = db.company_list.Find(id),
                                                     Full = s.Company_Name + " " + s.Program
                                                 }),
             "CompanyID",
             "Full",
             null);
+            */
             /*
             ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
                                                 select new
@@ -68,7 +72,10 @@ namespace CMR_Curriculum_Database.Controllers
                                                 "Full",
                                                 null);
                                                 */
+            ViewBag.CompanyID = new SelectList(db.company_list.OrderBy(item => item.Company_Name), "CompanyID", "Company_Name", cl.CompanyID);
             ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
+
+            
             return View();
         }
 
@@ -105,7 +112,7 @@ namespace CMR_Curriculum_Database.Controllers
             }
             ViewBag.CompanyID = new SelectList(db.company_list, "CompanyID", "Company_Name", company_map.CompanyID);
             ViewBag.ContentID = new SelectList(db.content, "ContentID", "Parent_Course_Name__if_applicable_", company_map.ContentID);
-            return View(company_map);
+            return View(company_map.content);
         }
 
         // POST: company_map/Edit/5

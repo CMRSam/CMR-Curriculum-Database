@@ -38,16 +38,14 @@ namespace CMR_Curriculum_Database.Models
         public string Delivered_In_ { get; set; }
         public string Resource_Duration { get; set; }
         public string Level { get; set; }
-        public string Role___Rep { get; set; }
-        public string Role___DM { get; set; }
-        public string Role___Account_Manager { get; set; }
-        public string Training_Planner { get; set; }
         public string Last_Revision_Date { get; set; }
         public string Related_Content { get; set; }
         public string Passing_Score_changed_to_80_ { get; set; }
         public string Writer { get; set; }
         public string SME { get; set; }
         public string ACPE_Module { get; set; }
+        public string In_Revision { get; set; }
+        public string Chicago_Approved { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<category_map> category_map { get; set; }

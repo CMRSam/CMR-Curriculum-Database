@@ -12,14 +12,14 @@
         @foreach (var pc in Model.parent_course_map)
         {
         <dt>
-            Parent Course
+            Parent Course:
         </dt>
         <dd>
             @Html.ActionLink(Html.DisplayFor(model => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.Parent_Course_ID })
         </dd>
         }
         <dt>
-            @Html.DisplayNameFor(model => model.Module_Name___PREVIOUS)
+            Content Title:
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Introduction)
+            Introduction:
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Objectives)
+            Objectives:
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Audio_Talent_used)
+            Audio Talent Used:
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ACTIVE_ON_WEBSITE)
+            Active:
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Notes)
+            Notes:
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Allowed_for_ASM_)
+            Allowed for ASM:
         </dt>
 
         <dd>
@@ -75,7 +75,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MAIE_Modules)
+            MAIE:
         </dt>
 
         <dd>
@@ -83,7 +83,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Search_Tagging)
+            Search Tagging:
         </dt>
 
         <dd>
@@ -91,7 +91,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Industry_Tagging___FOR_WEBSITE)
+            Industry Tagging:
         </dt>
 
         <dd>
@@ -99,7 +99,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Resources_Type)
+            Resource Type:
         </dt>
 
         <dd>
@@ -107,7 +107,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Delivered_In_)
+            Delivered In:
         </dt>
 
         <dd>
@@ -115,7 +115,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Resource_Duration)
+            Resource Duration:
         </dt>
 
         <dd>
@@ -123,7 +123,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Level)
+            Level:
         </dt>
 
         <dd>
@@ -131,39 +131,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Role___Rep)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role___Rep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role___DM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role___DM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Role___Account_Manager)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Role___Account_Manager)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Training_Planner)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Training_Planner)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Last_Revision_Date)
+            Last Revision Date:
         </dt>
 
         <dd>
@@ -171,7 +139,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Related_Content)
+            Related Content:
         </dt>
 
         <dd>
@@ -179,7 +147,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Passing_Score_changed_to_80_)
+            Passing Score Changed to 80:
         </dt>
 
         <dd>
@@ -187,7 +155,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Writer)
+            Writer:
         </dt>
 
         <dd>
@@ -195,7 +163,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SME)
+            SME:
         </dt>
 
         <dd>
@@ -203,11 +171,17 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ACPE_Module)
+            ACPE Module:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ACPE_Module)
+        </dd>
+        <dt>
+            Chicago Approved:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Chicago_Approved)
         </dd>
 
     </dl>

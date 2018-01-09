@@ -142,41 +142,31 @@ namespace CMR_Curriculum_Database.Controllers
         {
             StringBuilder builder = new StringBuilder();
             string csv = string.Empty;
-            string[] catArray = {};
-            int i = 0;
 
-            var mapping = from c in db.content join cm in db.category_map on c.ContentID equals cm.ContentID
-                          join cat in db.categories on cm.Category_ID equals cat.CategoryID
+            var mapping = from c in db.content
                           join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
                           join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
+                          join catmap in db.category_map on c.ContentID equals catmap.ContentID
+                          join categor in db.categories on catmap.Category_ID equals categor.CategoryID
                           select new
                           {
                               name = c.Module_Name___CURRENT,
-                              cat = cat.Category1
+                              parentCourse = pc.Parent_Course_Name,
+                              category_name = categor.Category1
                           };
 
-            var categories = from categor in db.categories
-                             join catmap in db.category_map on categor.CategoryID equals catmap.Category_ID
-                             join con in db.content on catmap.ContentID equals con.ContentID
-                             select categor;
-
-            foreach (var category in categories)
-            {
-                catArray[i] = category.Category1;
-                ++i;
-            }
+            csv += "Parent Course, Module Name CURRENT, Category";
+            csv += "\r\n";
 
             foreach (var content in mapping)
             {
+                csv += content.parentCourse.Replace(",", ";") + ',';
                 csv += content.name.Replace(",", ";") + ',';
-
-                for(int index = 0; i<catArray.Length;++i)
-                {
-                    csv += catArray[index].Replace(",", ";") + ',';
-                }
+                csv += content.category_name.Replace(",", ";") + ',';
                 
                 csv += "\r\n";
             }
+            
 
             byte[] bytes = Encoding.ASCII.GetBytes(csv);
             return File(bytes, "application/text", "Catalog.csv");

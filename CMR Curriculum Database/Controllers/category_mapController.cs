@@ -37,10 +37,22 @@ namespace CMR_Curriculum_Database.Controllers
         }
 
         // GET: category_map/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.Category_ID = new SelectList(db.categories.OrderBy(item => item.Category1), "CategoryID", "Category1");
-            ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
+            
+            /*if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }*/
+            content c = db.content.Find(id);
+            if (c == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.ContentList = new MultiSelectList(c.Module_Name___CURRENT, "ContentID", "Module_Name___CURRENT");
+            ViewBag.Category_ID = new MultiSelectList(db.categories.OrderBy(item => item.Category1), "CategoryID", "Category1");
+            ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", c.ContentID);
             return View();
         }
 
@@ -55,11 +67,12 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 db.category_map.Add(category_map);
                 db.SaveChanges();
-                return RedirectToAction("../company_map/Create");
+                return RedirectToAction("./");
             }
 
-            ViewBag.Category_ID = new SelectList(db.categories, "CategoryID", "Category1", category_map.Category_ID);
-            ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", category_map.ContentID);
+            ViewBag.ContentList = new MultiSelectList(db.content, "ContentID", "Module_Name___CURRENT");
+            ViewBag.Category_ID = new MultiSelectList(db.categories, "CategoryID", "Category1");
+            ViewBag.ContentID = new MultiSelectList(db.content, "ContentID", "Module_Name___CURRENT");
             return View(category_map);
         }
 

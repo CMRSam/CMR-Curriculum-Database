@@ -322,6 +322,7 @@
     <Compile Include="Controllers\company_listController.cs" />
     <Compile Include="Controllers\company_mapController.cs" />
     <Compile Include="Controllers\contentController.cs" />
+    <Compile Include="Controllers\DropdownController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\parent_courseController.cs" />
@@ -330,12 +331,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddCompanyVM.cs" />
     <Compile Include="Models\category.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\category_map.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckBoxListItem.cs" />
     <Compile Include="Models\CMRCurriculum.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -439,6 +442,9 @@
     <None Include="Properties\PublishProfiles\cmr2.pubxml" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\webd.pubxml" />
+    <Content Include="Views\Category Assoc.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_PartialPage1.cshtml" />
     <None Include="_bin_deployableAssemblies\cmriservices.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
@@ -524,6 +530,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Dropdown\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -45,6 +45,9 @@
                 @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div>
+            @Html.EditFor(model => model.Company_Name);
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

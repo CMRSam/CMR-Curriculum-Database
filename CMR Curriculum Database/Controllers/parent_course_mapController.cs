@@ -37,10 +37,12 @@ namespace CMR_Curriculum_Database.Controllers
         }
 
         // GET: parent_course_map/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
+            content c = db.content.Find(id);
+
+            ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT", c.ContentID);
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses.OrderBy(item => item.Parent_Course_Name), "Parent_Course_ID", "Parent_Course_Name");
-            ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
             return View();
         }
 
@@ -75,6 +77,7 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses, "Parent_Course_ID", "Parent_Course_Name", parent_course_map.Parent_Course_ID);
             ViewBag.Module_ID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", parent_course_map.Module_ID);
             return View(parent_course_map);
