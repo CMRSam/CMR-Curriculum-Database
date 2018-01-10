@@ -25,8 +25,8 @@
             <PropertyRef Name="CompanyMapID" />
           </Key>
           <Property Name="CompanyMapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyID" Type="int" Nullable="false" />
           <Property Name="ContentID" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="company_list">
           <Key>
@@ -111,20 +111,6 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="company map_ibfk_1">
-          <End Role="content" Type="Self.content" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="company map" Type="Self.company map" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="content">
-              <PropertyRef Name="ContentID" />
-            </Principal>
-            <Dependent Role="company map">
-              <PropertyRef Name="ContentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKCompany">
           <End Role="company_list" Type="Self.company_list" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -135,6 +121,20 @@
             </Principal>
             <Dependent Role="company map">
               <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="company map_ibfk_2">
+          <End Role="content" Type="Self.content" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="company map" Type="Self.company map" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="content">
+              <PropertyRef Name="ContentID" />
+            </Principal>
+            <Dependent Role="company map">
+              <PropertyRef Name="ContentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -183,11 +183,11 @@
             <End Role="category_map" EntitySet="category_map" />
           </AssociationSet>
           <AssociationSet Name="company map_ibfk_1" Association="Self.company map_ibfk_1">
-            <End Role="content" EntitySet="content" />
+            <End Role="company_list" EntitySet="company_list" />
             <End Role="company map" EntitySet="company map" />
           </AssociationSet>
-          <AssociationSet Name="FKCompany" Association="Self.FKCompany">
-            <End Role="company_list" EntitySet="company_list" />
+          <AssociationSet Name="company map_ibfk_2" Association="Self.company map_ibfk_2">
+            <End Role="content" EntitySet="content" />
             <End Role="company map" EntitySet="company map" />
           </AssociationSet>
           <AssociationSet Name="parent_course_map_ibfk_1" Association="Self.parent_course_map_ibfk_1">
