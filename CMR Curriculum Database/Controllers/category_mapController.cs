@@ -45,14 +45,24 @@ namespace CMR_Curriculum_Database.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }*/
             content c = db.content.Find(id);
+            category cat = db.categories.Find(id);
+
             if (c == null)
             {
-                return HttpNotFound();
+                ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT");
             }
-
-            ViewBag.ContentList = new MultiSelectList(c.Module_Name___CURRENT, "ContentID", "Module_Name___CURRENT");
-            ViewBag.Category_ID = new MultiSelectList(db.categories.OrderBy(item => item.Category1), "CategoryID", "Category1");
-            ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", c.ContentID);
+            else
+            {
+                ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", c.ContentID);
+            }
+            if (cat == null)
+            {
+                ViewBag.CategoryID = new SelectList(db.categories.OrderBy(item => item.Category1), "CategoryID", "Category1");
+            }
+            else
+            {
+                ViewBag.CategoryID = new SelectList(db.categories.OrderBy(item => item.Category1), "CategoryID", "Category1", cat.CategoryID);
+            }
             return View();
         }
 
@@ -61,16 +71,15 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ContentID,Category_ID")] category_map category_map)
+        public ActionResult Create([Bind(Include = "ID,ContentID,CategoryID")] category_map category_map, int? id)
         {
             if (ModelState.IsValid)
             {
                 db.category_map.Add(category_map);
                 db.SaveChanges();
-                return RedirectToAction("../");
+                return RedirectToAction("../content/Details/"+id);
             }
-
-            ViewBag.ContentList = new MultiSelectList(db.content, "ContentID", "Module_Name___CURRENT");
+            
             ViewBag.Category_ID = new MultiSelectList(db.categories, "CategoryID", "Category1");
             ViewBag.ContentID = new MultiSelectList(db.content, "ContentID", "Module_Name___CURRENT");
             return View(category_map);
@@ -129,12 +138,12 @@ namespace CMR_Curriculum_Database.Controllers
         // POST: category_map/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? contentID)
         {
             category_map category_map = db.category_map.Find(id);
             db.category_map.Remove(category_map);
             db.SaveChanges();
-            return RedirectToAction("../content");
+            return RedirectToAction("../content/Details/"+contentID);
         }
 
         protected override void Dispose(bool disposing)

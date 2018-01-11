@@ -14,6 +14,7 @@
         <h2><strong>@Html.DisplayFor(model => model.Category1)</strong></h2>
 
     </dl>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID })
     <table class="table">
         <tr>
             <th>
@@ -25,13 +26,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT)
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT).ToHtmlString(), "../content/Details", new { id=item.content.ContentID })
                 </td>
             </tr>
         }
     </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index")
 </p>

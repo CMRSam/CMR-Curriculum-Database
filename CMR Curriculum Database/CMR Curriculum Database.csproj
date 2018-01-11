@@ -445,6 +445,8 @@
     <Content Include="Views\Category Assoc.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CheckBoxListItem.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_PartialPage1.cshtml" />
+    <Content Include="Views\mapping\Index.cshtml" />
+    <Content Include="Views\Home\mapping.cshtml" />
     <None Include="_bin_deployableAssemblies\cmriservices.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

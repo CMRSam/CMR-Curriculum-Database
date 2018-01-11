@@ -58,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.content.Resources_Type)
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "../company_map/Delete", new { id=item.CompanyMapID })
+                    @Html.ActionLink("Remove", "../company_map/Delete", new { id=item.CompanyMapID, companyID=Model.CompanyID })
                 </td>
             </tr>
         }

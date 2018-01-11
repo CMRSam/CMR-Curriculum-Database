@@ -53,7 +53,7 @@ namespace CMR_Curriculum_Database.Controllers
         {
             company_list cl = db.company_list.Find(id);
             content c = db.content.Find(id);
-            
+
             /*ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
                                                 select new
                                                 {
@@ -64,19 +64,23 @@ namespace CMR_Curriculum_Database.Controllers
             "Full",
             null);
             */
-            /*
-            ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
-                                                select new
-                                                {
-                                                    Full = s.Company_Name + " " + s.Program
-                                                }),
-                                                "Full",
-                                                null);
-                                                */
-            ViewBag.CompanyID = new SelectList(db.company_list.OrderBy(item => item.Company_Name), "CompanyID", "Company_Name", cl.CompanyID);
-            ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
 
-            
+            if (cl == null)
+            {
+                ViewBag.CompanyID = new SelectList(db.company_list.OrderBy(item => item.Company_Name), "CompanyID", "Company_Name");
+            }
+            else
+            {
+                ViewBag.CompanyID = new SelectList(db.company_list.OrderBy(item => item.Company_Name), "CompanyID", "Company_Name", cl.CompanyID);
+            }
+            if (c == null)
+            {
+                ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
+            }
+            else
+            {
+                ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT", c.ContentID);
+            }
             return View();
         }
 
@@ -85,17 +89,17 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompanyMapID,CompanyID,ContentID")] company_map company_map)
+        public ActionResult Create([Bind(Include = "CompanyMapID,CompanyID,ContentID")] company_map company_map, int? id)
         {
             if (ModelState.IsValid)
             {
                 db.company_maps.Add(company_map);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
+                return RedirectToAction("../company_list/Details/"+id);
             }
 
             ViewBag.CompanyID = new SelectList(db.company_list, "CompanyID", "Company_Name", "Program", company_map.CompanyID);
-            ViewBag.ContentID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", company_map.ContentID);
+            ViewBag.ContentID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT", company_map.ContentID);
             return View();
         }
 
@@ -121,13 +125,13 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompanyMapID,CompanyID,ContentID")] company_map company_map)
+        public ActionResult Edit([Bind(Include = "CompanyMapID,CompanyID,ContentID")] company_map company_map, int? id)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(company_map).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../company_list/Details/"+id);
             }
             ViewBag.CompanyID = new SelectList(db.company_list, "CompanyID", "Company_Name", company_map.CompanyID);
             ViewBag.ContentID = new SelectList(db.content, "ContentID", "Parent_Course_Name__if_applicable_", company_map.ContentID);
@@ -152,12 +156,12 @@ namespace CMR_Curriculum_Database.Controllers
         // POST: company_map/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int? companyID)
         {
             company_map company_map = db.company_maps.Find(id);
             db.company_maps.Remove(company_map);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../company_list/Details/"+companyID);
         }
 
         protected override void Dispose(bool disposing)

@@ -29,80 +29,17 @@
         <th>
             Module Name - PREVIOUS
         </th>
-        <!--
-        <th>
-            @Html.DisplayNameFor(model => model.Introduction)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Objectives)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Audio_Talent_used)
-        </th>
-        -->
+       
         <th>
             Active on Website
         </th>
-        <!--
+        
         <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Allowed_for_ASM_)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MAIE_Modules)
-        </th>
-         -->
-        <th>
-            Main Category
-        </th>
-        <th>
-            Subcategory
+            Category
         </th>
         <th>
             Resource Type
         </th>
-        <!--
-        
-            
-        <th>
-            @Html.DisplayNameFor(model => model.Search_Tagging)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Industry_Tagging___FOR_WEBSITE)
-        </th>
-        -->
-        
-        <!--
-        <th>
-            @Html.DisplayNameFor(model => model.Delivered_In_)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource_Duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Level)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Last_Revision_Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Related_Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Passing_Score_changed_to_80_)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Writer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ACPE_Module)
-        </th>
-            -->
         <th></th>
     </tr>
 
@@ -121,71 +58,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.Module_Name___PREVIOUS)
         </td>
-        <!--
-        <td>
-            @Html.DisplayFor(modelItem => item.Introduction)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Objectives)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Audio_Talent_used)
-        </td>
-        -->
+        
         <td>
             @Html.DisplayFor(modelItem => item.ACTIVE_ON_WEBSITE)
         </td>
-        <!--
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Allowed_for_ASM_)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MAIE_Modules)
-        </td>
-        -->
+        @foreach (var cat in item.category_map)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => cat.category.Category1)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.Resources_Type)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Search_Tagging)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Industry_Tagging___FOR_WEBSITE)
-        </td>
         
-        <!--
-        <td>
-            @Html.DisplayFor(modelItem => item.Delivered_In_)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Resource_Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Level)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Last_Revision_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Related_Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Passing_Score_changed_to_80_)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Writer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ACPE_Module)
-        </td>
-            -->
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
              

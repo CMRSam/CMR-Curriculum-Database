@@ -27,6 +27,7 @@
             </tr>
         }
     </table>
+    @Html.ActionLink("Add content to parent course", "../parent_course_map/Create", new { id = Model.Parent_Course_ID })
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Parent_Course_ID }) |

@@ -91,13 +91,13 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompanyID,Company_Name,Delivery_Method,Program,Notes")] company_list company_list)
+        public ActionResult Edit([Bind(Include = "CompanyID,Company_Name,Delivery_Method,Program,Notes")] company_list company_list, int? id)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(company_list).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/"+id);
             }
             return View(company_list);
         }

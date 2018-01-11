@@ -15,9 +15,14 @@ namespace CMR_Curriculum_Database.Controllers
         private curriculumEntities db = new curriculumEntities();
 
         // GET: parent_course
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.parent_courses.ToList());
+            var pc = from m in db.parent_courses select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pc = pc.Where(m => m.Parent_Course_Name.Contains(searchString));
+            }
+            return View(pc.ToList());
         }
 
         // GET: parent_course/Details/5

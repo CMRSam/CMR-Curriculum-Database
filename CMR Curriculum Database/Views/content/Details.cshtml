@@ -131,6 +131,14 @@
         </dd>
 
         <dt>
+            In Revision:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.In_Revision)
+        </dd>
+
+        <dt>
             Last Revision Date:
         </dt>
 
@@ -186,7 +194,7 @@
 
     </dl>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) | @Html.ActionLink("Add Parent Course", "../parent_course_map/Create", new { id = Model.ContentID })
     </p>
     <table class="table">
         <tr>
@@ -202,7 +210,7 @@
                     @Html.ActionLink(Html.DisplayFor(modelItem => item.category.Category1).ToHtmlString(), "../categories/Details", new {id = item.CategoryID})
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "../category_map/Delete", new { id=item.ID })
+                    @Html.ActionLink("Remove", "../category_map/Delete", new { id=item.ID, contentID=Model.ContentID })
                 </td>
             </tr>
         }
@@ -253,7 +261,7 @@
     
 </div>
 <p>
-    @Html.ActionLink("Add a company association", "../company_list")
+    @Html.ActionLink("Add a company association", "../company_map/Create", new { id = Model.ContentID })
 </p>
 <p>
     @Html.ActionLink("Back to List", "../content/Index")

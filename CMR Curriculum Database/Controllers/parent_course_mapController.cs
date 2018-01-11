@@ -41,9 +41,24 @@ namespace CMR_Curriculum_Database.Controllers
         public ActionResult Create(int? id)
         {
             content c = db.content.Find(id);
+            parent_course pc = db.parent_courses.Find(id);
 
-            ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
-            ViewBag.Parent_Course_ID = new SelectList(db.parent_courses.OrderBy(item => item.Parent_Course_Name), "Parent_Course_ID", "Parent_Course_Name");
+            if(c == null)
+            {
+                ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT");
+            }
+            else
+            {
+                ViewBag.Module_ID = new SelectList(db.content.OrderBy(item => item.Module_Name___CURRENT), "ContentID", "Module_Name___CURRENT", c.ContentID);
+            }
+            if (pc == null)
+            {
+                ViewBag.Parent_Course_ID = new SelectList(db.parent_courses.OrderBy(item => item.Parent_Course_Name), "Parent_Course_ID", "Parent_Course_Name");
+            }
+            else
+            {
+                ViewBag.Parent_Course_ID = new SelectList(db.parent_courses.OrderBy(item => item.Parent_Course_Name), "Parent_Course_ID", "Parent_Course_Name", pc.Parent_Course_ID);
+            }
             return View();
         }
 
@@ -52,13 +67,13 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Parent_Course_ID,Module_ID")] parent_course_map parent_course_map)
+        public ActionResult Create([Bind(Include = "ID,Parent_Course_ID,Module_ID")] parent_course_map parent_course_map, int? id)
         {
             if (ModelState.IsValid)
             {
                 db.parent_course_map.Add(parent_course_map);
                 db.SaveChanges();
-                return RedirectToAction("../content/Index");
+                return RedirectToAction("../content/Details/"+id);
             }
 
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses, "Parent_Course_ID", "Parent_Course_Name", parent_course_map.Parent_Course_ID);
