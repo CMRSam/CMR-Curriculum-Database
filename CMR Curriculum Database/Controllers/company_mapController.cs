@@ -67,7 +67,15 @@ namespace CMR_Curriculum_Database.Controllers
 
             if (cl == null)
             {
-                ViewBag.CompanyID = new SelectList(db.company_list.OrderBy(item => item.Company_Name), "CompanyID", "Company_Name");
+                ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
+                                                    select new
+                                                    {
+                                                        CompanyID = s.CompanyID,
+                                                        Full = s.Company_Name + " " + s.Program
+                                                    }),
+                "CompanyID",
+                "Full",
+                null);
             }
             else
             {
@@ -91,11 +99,22 @@ namespace CMR_Curriculum_Database.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CompanyMapID,CompanyID,ContentID")] company_map company_map, int? id)
         {
+            company_list cl = db.company_list.Find(id);
+            content c = db.content.Find(id);
+
             if (ModelState.IsValid)
             {
                 db.company_maps.Add(company_map);
                 db.SaveChanges();
-                return RedirectToAction("../company_list/Details/"+id);
+                if(cl==null)
+                {
+                    return RedirectToAction("../content/Details/" + id);
+                }
+                else
+                {
+                    return RedirectToAction("../company_list/Details/" + id);
+                }
+                
             }
 
             ViewBag.CompanyID = new SelectList(db.company_list, "CompanyID", "Company_Name", "Program", company_map.CompanyID);
