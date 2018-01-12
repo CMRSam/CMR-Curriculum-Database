@@ -317,6 +317,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\archived_contentController.cs" />
     <Compile Include="Controllers\categoriesController.cs" />
     <Compile Include="Controllers\category_mapController.cs" />
     <Compile Include="Controllers\company_listController.cs" />
@@ -332,6 +333,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddCompanyVM.cs" />
+    <Compile Include="Models\archived_content.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\category.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
@@ -447,6 +451,11 @@
     <Content Include="Views\Shared\EditorTemplates\_PartialPage1.cshtml" />
     <Content Include="Views\mapping\Index.cshtml" />
     <Content Include="Views\Home\mapping.cshtml" />
+    <Content Include="Views\archived_content\Create.cshtml" />
+    <Content Include="Views\archived_content\Delete.cshtml" />
+    <Content Include="Views\archived_content\Details.cshtml" />
+    <Content Include="Views\archived_content\Edit.cshtml" />
+    <Content Include="Views\archived_content\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\cmriservices.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

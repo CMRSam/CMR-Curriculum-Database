@@ -50,6 +50,13 @@ namespace CMR_Curriculum_Database.Controllers
         // GET: contents/Create
         public ActionResult Create()
         {
+            List<String> types = new List<String>();
+            string[] typeArray = { "eModule", "Whitepaper", "Microminutes", "Job aid"};
+            foreach(var type in typeArray)
+            {
+                types.Add(type);
+            }
+            ViewBag.ListOfTypes = types;
             return View();
         }
 
@@ -170,6 +177,43 @@ namespace CMR_Curriculum_Database.Controllers
 
             byte[] bytes = Encoding.ASCII.GetBytes(csv);
             return File(bytes, "application/text", "Catalog.csv");
+        }
+
+        public ActionResult Archive(int? id)
+        {
+            content c = db.content.Find(id);
+            archived_content ac = new archived_content
+            {
+                Module_Name___CURRENT = c.Module_Name___CURRENT,
+                Module_Name___PREVIOUS = c.Module_Name___PREVIOUS,
+                Introduction = c.Introduction,
+                Objectives = c.Objectives,
+                In_Revision = c.In_Revision,
+                Audio_Talent_used = c.Audio_Talent_used,
+                ACTIVE_ON_WEBSITE = c.ACTIVE_ON_WEBSITE,
+                Notes = c.Notes,
+                Allowed_for_ASM_ = c.Allowed_for_ASM_,
+                MAIE_Modules = c.MAIE_Modules,
+                Search_Tagging = c.Search_Tagging,
+                Industry_Tagging___FOR_WEBSITE = c.Industry_Tagging___FOR_WEBSITE,
+                Resources_Type = c.Resources_Type,
+                Delivered_In_ = c.Delivered_In_,
+                Resource_Duration = c.Resource_Duration,
+                Level = c.Level,
+                Last_Revision_Date = c.Last_Revision_Date,
+                Related_Content = c.Related_Content,
+                Passing_Score_changed_to_80_ = c.Passing_Score_changed_to_80_,
+                Writer = c.Writer,
+                SME = c.SME,
+                Chicago_Approved = c.Chicago_Approved,
+                ACPE_Module = c.ACPE_Module
+            };
+
+            db.content.Remove(c);
+            db.archived_content.Add(ac);
+            db.SaveChanges();
+            
+            return RedirectToAction("../archived_content/Index");
         }
     }
 }

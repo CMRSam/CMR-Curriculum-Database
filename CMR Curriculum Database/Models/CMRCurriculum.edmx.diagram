@@ -18,7 +18,8 @@
         <AssociationConnector Association="curriculumModel.FKCompany" />
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_1" />
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_2" />
-      </Diagram>
+        <EntityTypeShape EntityType="curriculumModel.archived_content" Width="1.5" PointX="5.375" PointY="0.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -32,5 +32,6 @@ namespace CMR_Curriculum_Database.Models
         public virtual DbSet<content> content { get; set; }
         public virtual DbSet<parent_course> parent_courses { get; set; }
         public virtual DbSet<parent_course_map> parent_course_map { get; set; }
+        public virtual DbSet<archived_content> archived_content { get; set; }
     }
 }
