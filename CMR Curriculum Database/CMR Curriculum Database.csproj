@@ -331,6 +331,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddCompanyVM.cs" />
     <Compile Include="Models\archived_content.cs">
@@ -365,6 +366,24 @@
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\content.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_aspnetroles.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_aspnetuserclaims.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_aspnetuserlogins.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_aspnetuserroles.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_aspnetusers.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbo_migrationhistory.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />

@@ -33,19 +33,20 @@
         <th>
             Active on Website
         </th>
-        
-        <th>
-            Category
-        </th>
         <th>
             Resource Type
         </th>
+        <th>
+            Categories
+        </th>
+        <th>
+        
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
+        <tr>
         @foreach (var pc in item.parent_course_map)
         {
         <td>
@@ -62,22 +63,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.ACTIVE_ON_WEBSITE)
         </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Resources_Type)
+        </td>
         @foreach (var cat in item.category_map)
         {
             <td>
                 @Html.DisplayFor(modelItem => cat.category.Category1)
             </td>
+
+
         }
-        <td>
-            @Html.DisplayFor(modelItem => item.Resources_Type)
-        </td>
         
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ContentID }) |
-             
-            @Html.ActionLink("Archive", "Delete", new { id=item.ContentID })
-            
-        </td>
+        
     </tr>
 }
 

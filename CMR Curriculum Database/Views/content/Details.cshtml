@@ -194,7 +194,8 @@
 
     </dl>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) | @Html.ActionLink("Add Parent Course", "../parent_course_map/Create", new { id = Model.ContentID })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) | @Html.ActionLink("Archive", "Delete", new { id=Model.ContentID }) | @Html.ActionLink("Add Parent Course", "../parent_course_map/Create", new { id = Model.ContentID })
+            
     </p>
     <table class="table">
         <tr>

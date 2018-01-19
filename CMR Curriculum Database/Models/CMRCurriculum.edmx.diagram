@@ -19,6 +19,12 @@
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_1" />
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_2" />
         <EntityTypeShape EntityType="curriculumModel.archived_content" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetroles" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserclaims" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserlogins" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserroles" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetusers" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.dbo_migrationhistory" Width="1.5" PointX="9.375" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

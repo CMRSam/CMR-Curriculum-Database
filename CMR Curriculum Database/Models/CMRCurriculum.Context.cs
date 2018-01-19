@@ -33,5 +33,11 @@ namespace CMR_Curriculum_Database.Models
         public virtual DbSet<parent_course> parent_courses { get; set; }
         public virtual DbSet<parent_course_map> parent_course_map { get; set; }
         public virtual DbSet<archived_content> archived_content { get; set; }
+        public virtual DbSet<dbo_aspnetroles> dbo_aspnetroles { get; set; }
+        public virtual DbSet<dbo_aspnetuserclaims> dbo_aspnetuserclaims { get; set; }
+        public virtual DbSet<dbo_aspnetuserlogins> dbo_aspnetuserlogins { get; set; }
+        public virtual DbSet<dbo_aspnetuserroles> dbo_aspnetuserroles { get; set; }
+        public virtual DbSet<dbo_aspnetusers> dbo_aspnetusers { get; set; }
+        public virtual DbSet<dbo_migrationhistory> dbo_migrationhistory { get; set; }
     }
 }

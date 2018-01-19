@@ -19,13 +19,18 @@ namespace CMR_Curriculum_Database.Controllers
         // GET: company_list
         public ActionResult Index(string searchString)
         {
+            char delim = ' ';
             var company = from m in db.company_list select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                company = company.Where(m => m.Company_Name.Contains(searchString) ||
-                                             m.Program.Contains(searchString) ||
-                                             m.Delivery_Method.Contains(searchString) ||
-                                             m.Notes.Contains(searchString));
+                string[] searchStringArray = searchString.Split(delim);
+                foreach (var s in searchStringArray)
+                {
+                    company = company.Where(m => m.Company_Name.Contains(s) ||
+                                                 m.Program.Contains(s) ||
+                                                 m.Delivery_Method.Contains(s) ||
+                                                 m.Notes.Contains(s));
+                }
             }
             return View(company.ToList());
         }

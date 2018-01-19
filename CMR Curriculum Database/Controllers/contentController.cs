@@ -19,15 +19,20 @@ namespace CMR_Curriculum_Database.Controllers
         // GET: contents
         public ActionResult Index(string searchString)
         {
+            char delim = ' ';
             var content = from m in db.content select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                content = content.Where(m => m.Module_Name___CURRENT.Contains(searchString) ||
-                                             m.Objectives.Contains(searchString) ||
-                                             m.Industry_Tagging___FOR_WEBSITE.Contains(searchString) ||
-                                             m.Introduction.Contains(searchString) ||
-                                             m.Audio_Talent_used.Contains(searchString) ||
-                                             m.Resources_Type.Contains(searchString));
+                string[] searchStringArray = searchString.Split(delim);
+                foreach (var s in searchStringArray)
+                {
+                    content = content.Where(m => m.Module_Name___CURRENT.Contains(s) ||
+                                             m.Objectives.Contains(s) ||
+                                             m.Industry_Tagging___FOR_WEBSITE.Contains(s) ||
+                                             m.Introduction.Contains(s) ||
+                                             m.Audio_Talent_used.Contains(s) ||
+                                             m.Resources_Type.Contains(s));
+                }
             }
             return View(content.ToList());
         }

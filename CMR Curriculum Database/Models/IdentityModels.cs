@@ -21,7 +21,7 @@ namespace CMR_Curriculum_Database.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("name=curriculumEntities", throwIfV1Schema: false)
         {
         }
 
