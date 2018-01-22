@@ -5,7 +5,8 @@
 }
 
 <h2>Index</h2>
-
+@if(Request.IsAuthenticated)
+{
 <p>
     @Html.ActionLink("Create New", "Create", new { id = 754 })
 </p>
@@ -37,3 +38,11 @@
 }
 
 </table>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}

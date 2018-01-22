@@ -6,8 +6,8 @@
 
 <h2>Edit</h2>
 
-
-@using (Html.BeginForm())
+@if(Request.IsAuthenticated)
+using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -47,4 +47,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
 }

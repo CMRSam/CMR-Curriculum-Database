@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<CMR_Curriculum_Database.Models.content>
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.Title = "Index";
 }
-
-
-
 <h2><strong>Content</strong></h2>
-
+@if(Request.IsAuthenticated)
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm())
+using (Html.BeginForm())
 {
     <p>
         Search Content: @Html.TextBox("SearchString")
@@ -81,3 +80,11 @@
 }
 
 </table>
+}
+else
+{
+    <div>
+        @Html.ActionLink("You must login to use this database", "Login", "Account")
+    </div>
+
+}

@@ -5,7 +5,8 @@
 }
 
 <h2>Are you sure you want to delete <strong>@Html.DisplayFor(model => model.Company_Name)</strong>?</h2>
-
+@if(Request.IsAuthenticated)
+{
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -52,3 +53,11 @@
         </div>
     }
 </div>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}

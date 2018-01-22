@@ -5,7 +5,8 @@
 }
 
 <h2>Details</h2>
-
+@if(Request.IsAuthenticated)
+{
 <div>
     <h4>company_map</h4>
     <hr />
@@ -32,3 +33,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyMapID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}

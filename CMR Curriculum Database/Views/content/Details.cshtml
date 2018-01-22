@@ -5,7 +5,8 @@
 }
 
 <h2><strong>@Html.DisplayFor(model => model.Module_Name___CURRENT)</strong></h2>
-
+@if(Request.IsAuthenticated)
+{
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -267,3 +268,11 @@
 <p>
     @Html.ActionLink("Back to List", "../content/Index")
 </p>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}

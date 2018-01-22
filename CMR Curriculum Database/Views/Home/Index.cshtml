@@ -1,20 +1,39 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@using Microsoft.AspNet.Identity
 
-<div class="jumbotron">
-    <h1>CMR Curriculum Database</h1>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div>
-            @Html.ActionLink("Content", "Index", "content/Index")<br />
-            @Html.ActionLink("Companies", "Index", "company_list")<br />
-            @Html.ActionLink("Parent Courses", "Index", "parent_course")<br />
-            @Html.ActionLink("Categories", "Index", "categories")
+    @{
+        ViewBag.Title = "Home Page";
+    }
+
+    <div class="jumbotron">
+        <h1>CMR Curriculum Database</h1>
+    </div>
+
+        <div class="row">
+    
+        
+
+            <div class="col-md-4">
+        
+        
+            @if (Request.IsAuthenticated)
+            {
+                <div>
+                    @Html.ActionLink("Content", "Index", "content/Index")<br />
+                    @Html.ActionLink("Companies", "Index", "company_list")<br />
+                    @Html.ActionLink("Parent Courses", "Index", "parent_course")<br />
+                    @Html.ActionLink("Categories", "Index", "categories")
             
 
            
-        </div>
-</div>
+                </div>
+            }
+            else
+            {
+                <div>
+                    @Html.ActionLink("You must login to use this database", "Login", "Account")
+                </div>
+            }
+             </div>
+            
+    

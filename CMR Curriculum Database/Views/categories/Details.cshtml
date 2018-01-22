@@ -5,7 +5,8 @@
 }
 
 
-
+@if(Request.IsAuthenticated)
+{
 <div>
     <hr />
     <dl class="dl-horizontal">
@@ -35,3 +36,11 @@
 <p>
     @Html.ActionLink("Back", "Index")
 </p>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}
