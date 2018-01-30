@@ -67,7 +67,7 @@ namespace CMR_Curriculum_Database.Controllers
 
             if (cl == null)
             {
-                ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList()
+                ViewBag.CompanyID = new SelectList((from s in db.company_list.ToList() orderby s.Company_Name
                                                     select new
                                                     {
                                                         CompanyID = s.CompanyID,

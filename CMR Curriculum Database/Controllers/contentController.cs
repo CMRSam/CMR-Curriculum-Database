@@ -20,7 +20,12 @@ namespace CMR_Curriculum_Database.Controllers
         public ActionResult Index(string searchString)
         {
             char delim = ' ';
-            var content = from m in db.content select m;
+            var content = from m in db.content
+                          join pcm in db.parent_course_map on m.ContentID equals pcm.Module_ID
+                          join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
+                          orderby pc.Parent_Course_Name
+                          select m;
+            var parentCourse = from p in db.parent_courses select p;
             if (!String.IsNullOrEmpty(searchString))
             {
                 string[] searchStringArray = searchString.Split(delim);
@@ -167,14 +172,16 @@ namespace CMR_Curriculum_Database.Controllers
                               category_name = categor.Category1
                           };
 
-            csv += "Parent Course, Module Name CURRENT, Category";
+
+
+            csv += "Parent Course,Module Name CURRENT,Category";
             csv += "\r\n";
 
             foreach (var content in mapping)
             {
-                csv += content.parentCourse.Replace(",", ";") + ',';
-                csv += content.name.Replace(",", ";") + ',';
-                csv += content.category_name.Replace(",", ";") + ',';
+                csv += content.parentCourse.Replace(",", " ") + ',';
+                csv += content.name.Replace(",", " ") + ',';
+                csv += content.category_name.Replace(",", " ") + ',';
                 
                 csv += "\r\n";
             }
@@ -220,5 +227,8 @@ namespace CMR_Curriculum_Database.Controllers
             
             return RedirectToAction("../archived_content/Index");
         }
+
+        
+
     }
 }

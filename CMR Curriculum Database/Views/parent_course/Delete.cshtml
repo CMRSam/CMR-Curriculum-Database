@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Delete";
 }
-
+@if(Request.IsAuthenticated)
+{
 <h2>Are you sure you want to delete <strong>@Html.DisplayFor(model => model.Parent_Course_Name)</strong>?</h2>
 <div>
     <hr />
@@ -27,3 +28,11 @@
         </div>
     }
 </div>
+}
+else
+{
+<div>
+    @Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+
+}

@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@foreach (var item in Model.company_map)
+{
 <h2><strong>@Html.DisplayFor(model => model.Module_Name___CURRENT)</strong></h2>
+}
 @if(Request.IsAuthenticated)
 {
 <div>

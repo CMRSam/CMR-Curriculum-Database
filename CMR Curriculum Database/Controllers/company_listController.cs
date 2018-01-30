@@ -141,5 +141,15 @@ namespace CMR_Curriculum_Database.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public int ModuleCount(int companyId)
+        {
+            var count = 0;
+
+            count = (from c in db.company_maps
+                     where c.CompanyID == companyId
+                     select c).Count();
+            return count;
+        }
     }
 }

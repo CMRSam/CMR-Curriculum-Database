@@ -20,7 +20,7 @@ namespace CMR_Curriculum_Database.Controllers
             var pc = from m in db.parent_courses select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                pc = pc.Where(m => m.Parent_Course_Name.Contains(searchString));
+                pc = pc.Where(m => m.Parent_Course_Name.Contains(searchString)).OrderBy(p => p.Parent_Course_Name);
             }
             return View(pc.ToList());
         }

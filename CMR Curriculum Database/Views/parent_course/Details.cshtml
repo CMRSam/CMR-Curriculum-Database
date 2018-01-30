@@ -5,7 +5,8 @@
 }
 
 <h2><strong>@Html.DisplayFor(model => model.Parent_Course_Name)</strong></h2>
-
+@if(Request.IsAuthenticated)
+{
 <div>
     
     <table class="table">
@@ -19,7 +20,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT)
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT).ToHtmlString(), "../content/Details/", new { id= item.content.ContentID })
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "../parent_course_map/Delete", new { id=item.ID })
@@ -33,3 +34,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Parent_Course_ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+}
+else
+{
+<div>
+@Html.ActionLink("You must login to use this database", "Login", "Account")
+</div>
+}
+    </div>
