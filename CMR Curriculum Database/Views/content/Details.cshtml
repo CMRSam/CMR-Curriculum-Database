@@ -5,7 +5,11 @@
 }
 @foreach (var item in Model.company_map)
 {
+     
+}
 <h2><strong>@Html.DisplayFor(model => model.Module_Name___CURRENT)</strong></h2>
+@foreach (var item in Model.company_map)
+{
 }
 @if(Request.IsAuthenticated)
 {
@@ -22,7 +26,7 @@
         </dd>
         }
         <dt>
-            Content Title:
+            Previous Content Title:
         </dt>
 
         <dd>

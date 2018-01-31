@@ -139,7 +139,13 @@ using (Html.BeginForm())
             </div>
         </div>
 
-        
+        <div class="form-group">
+            @Html.LabelFor(model => model.In_Revision, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.In_Revision, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.In_Revision, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Last_Revision_Date, htmlAttributes: new { @class = "control-label col-md-2" })

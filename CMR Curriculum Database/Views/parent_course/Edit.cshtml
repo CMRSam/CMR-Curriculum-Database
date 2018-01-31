@@ -6,12 +6,12 @@
 
 <h2>Edit</h2>
 @if (Request.IsAuthenticated)
- {
-
-using (Html.BeginForm())
 {
+
+    using (Html.BeginForm())
+    {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>parent_course</h4>
         <hr />
@@ -32,7 +32,7 @@ using (Html.BeginForm())
             </div>
         </div>
     </div>
-}
+    }
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -41,10 +41,11 @@ using (Html.BeginForm())
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+}
 else
 {
-<div>
+< div >
     @Html.ActionLink("You must login to use this database", "Login", "Account")
-</div>
+</ div >
 }
 </div>
