@@ -70,7 +70,7 @@
     @Html.ActionLink("Add content to company", "../company_map/Create", new { id=Model.CompanyID})
 </p>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index", new { searchString = Model.Company_Name })
 </p>
 }
 else

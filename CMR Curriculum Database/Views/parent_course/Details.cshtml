@@ -5,8 +5,10 @@
 }
 
 <h2><strong>@Html.DisplayFor(model => model.Parent_Course_Name)</strong></h2>
-@if(Request.IsAuthenticated)
+<h4>   @Model.parent_course_map.Count() modules</h4>
+@if (Request.IsAuthenticated)
 {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Parent_Course_ID })
 <div>
     
     <table class="table">
@@ -23,7 +25,20 @@
                     @Html.ActionLink(Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT).ToHtmlString(), "../content/Details/", new { id= item.content.ContentID })
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "../parent_course_map/Delete", new { id=item.ID })
+                    @Html.DisplayFor(modelItem => item.content.Objectives)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.content.Resources_Type)
+                </td>
+                @foreach (var cat in item.content.category_map)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => cat.category.Category1)
+                    </td>
+                }
+
+                <td>
+                    @Html.ActionLink("Remove", "../parent_course_map/Delete", new { id=item.ID })
                 </td>
             </tr>
         }
@@ -31,8 +46,7 @@
     @Html.ActionLink("Add content to parent course", "../parent_course_map/Create", new { id = Model.Parent_Course_ID })
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Parent_Course_ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Index", new { searchString = Model.Parent_Course_Name })
 </p>
 }
 else

@@ -22,7 +22,7 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 pc = pc.Where(m => m.Parent_Course_Name.Contains(searchString)).OrderBy(p => p.Parent_Course_Name);
             }
-            return View(pc.ToList());
+            return View(pc.ToList().OrderBy(p => p.Parent_Course_Name));
         }
 
         // GET: parent_course/Details/5

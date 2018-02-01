@@ -31,7 +31,7 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyMapID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new { searchString = Model.company_list.Company_Name })
 </p>
 }
 else

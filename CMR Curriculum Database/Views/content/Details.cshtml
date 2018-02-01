@@ -11,7 +11,7 @@
 @foreach (var item in Model.company_map)
 {
 }
-@if(Request.IsAuthenticated)
+@if (Request.IsAuthenticated)
 {
 <div>
     <hr />
@@ -201,7 +201,7 @@
 
     </dl>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) | @Html.ActionLink("Archive", "Delete", new { id=Model.ContentID }) | @Html.ActionLink("Add Parent Course", "../parent_course_map/Create", new { id = Model.ContentID })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ContentID }) | @Html.ActionLink("Archive", "Delete", new { id = Model.ContentID }) | @Html.ActionLink("Add Parent Course", "../parent_course_map/Create", new { id = Model.ContentID })
             
     </p>
     <table class="table">
@@ -212,13 +212,13 @@
         </tr>
 
         @foreach (var item in Model.category_map)
-            {
+        {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.category.Category1).ToHtmlString(), "../categories/Details", new {id = item.CategoryID})
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.category.Category1).ToHtmlString(), "../categories/Details", new { id = item.CategoryID })
                 </td>
                 <td>
-                    @Html.ActionLink("Remove", "../category_map/Delete", new { id=item.ID, contentID=Model.ContentID })
+                    @Html.ActionLink("Remove", "../category_map/Delete", new { id = item.ID, contentID = Model.ContentID })
                 </td>
             </tr>
         }
@@ -248,7 +248,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.company_list.Company_Name).ToHtmlString(), "../company_list/Details", new {id = item.CompanyID })
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.company_list.Company_Name).ToHtmlString(), "../company_list/Details", new { id = item.CompanyID })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.company_list.Program)
@@ -261,7 +261,7 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Remove", "../company_map/Delete", new { id=item.CompanyMapID })
+                    @Html.ActionLink("Remove", "../company_map/Delete", new { id = item.CompanyMapID })
                 </td>
             </tr>
         }
@@ -271,14 +271,14 @@
 <p>
     @Html.ActionLink("Add a company association", "../company_map/Create", new { id = Model.ContentID })
 </p>
-<p>
-    @Html.ActionLink("Back to List", "../content/Index")
-</p>
+    <p>
+        @Html.ActionLink("Back", "../content/Index", new { searchString = Model.Module_Name___CURRENT })
+    </p>
 }
 else
 {
-<div>
+< div >
     @Html.ActionLink("You must login to use this database", "Login", "Account")
-</div>
+</ div >
 
 }

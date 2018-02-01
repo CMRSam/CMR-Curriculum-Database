@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CMR_Curriculum_Database.Models;
 using System.Text;
 using System.Reflection;
+using System.IO;
 
 namespace CMR_Curriculum_Database.Controllers
 {
@@ -155,40 +156,56 @@ namespace CMR_Curriculum_Database.Controllers
             base.Dispose(disposing);
         }
 
-        public FileResult Mapping(string separator = ",")
+        public void ExportExcel()
         {
-            StringBuilder builder = new StringBuilder();
-            string csv = string.Empty;
-
-            var mapping = from c in db.content
-                          join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
-                          join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
-                          join catmap in db.category_map on c.ContentID equals catmap.ContentID
-                          join categor in db.categories on catmap.CategoryID equals categor.CategoryID
-                          select new
-                          {
-                              name = c.Module_Name___CURRENT,
-                              parentCourse = pc.Parent_Course_Name,
-                              category_name = categor.Category1
-                          };
-
-
-
-            csv += "Parent Course,Module Name CURRENT,Category";
-            csv += "\r\n";
-
-            foreach (var content in mapping)
-            {
-                csv += content.parentCourse.Replace(",", " ") + ',';
-                csv += content.name.Replace(",", " ") + ',';
-                csv += content.category_name.Replace(",", " ") + ',';
-                
-                csv += "\r\n";
-            }
-            
-
-            byte[] bytes = Encoding.ASCII.GetBytes(csv);
-            return File(bytes, "application/text", "Catalog.csv");
+            var sb = new StringBuilder();
+            var data = from c in db.content
+                       join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
+                       join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
+                       join catmap in db.category_map on c.ContentID equals catmap.ContentID
+                       join categor in db.categories on catmap.CategoryID equals categor.CategoryID
+                       select new
+                       {
+                           Parent_Course = pc.Parent_Course_Name,
+                           Content_Title = c.Module_Name___CURRENT,
+                           Previous_Content_Title = c.Module_Name___PREVIOUS,
+                           Introduction = c.Introduction,
+                           Objectives = c.Objectives,
+                           Category = categor.Category1,
+                           In_Revision = c.In_Revision,
+                           Audio_Talent_Used = c.Audio_Talent_used,
+                           Active_on_Website = c.ACTIVE_ON_WEBSITE,
+                           Notes = c.Notes,
+                           Allowed_for_ASM = c.Allowed_for_ASM_,
+                           MAIE_Modules = c.MAIE_Modules,
+                           Search_Tagging = c.Search_Tagging,
+                           Industry_Tagging = c.Industry_Tagging___FOR_WEBSITE,
+                           Resource_Type = c.Resources_Type,
+                           Delivered_In = c.Delivered_In_,
+                           Resource_Duration = c.Resource_Duration,
+                           Level = c.Level,
+                           Last_Revision_Date = c.Last_Revision_Date,
+                           Related_Content = c.Related_Content,
+                           Passing_Score_Changed_to_80 = c.Passing_Score_changed_to_80_,
+                           Writer = c.Writer,
+                           SME = c.SME,
+                           Chicago_Approved = c.Chicago_Approved,
+                           ACPE_Module = c.ACPE_Module
+                       };
+            var list = data.ToList();
+            var grid = new System.Web.UI.WebControls.GridView();
+            grid.DataSource = list;
+            grid.DataBind();
+            Response.ClearContent();
+            Response.AddHeader("content-disposition", "attachment; filename=Catalog.xls");
+            Response.ContentType = "application/vnd.ms-excel";
+            StringWriter sw = new StringWriter();
+            System.Web.UI.HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw);
+            grid.RenderControl(htw);
+            Response.Write(sw.ToString());
+            Response.End();
+            //byte[] bytes = Encoding.ASCII.GetBytes(sw.ToString());
+            //return File(bytes, "application/text", "Catalog.xls");
         }
 
         public ActionResult Archive(int? id)

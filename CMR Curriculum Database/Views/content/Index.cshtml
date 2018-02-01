@@ -11,7 +11,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <p>
-    @Html.ActionLink("Mapping", "Mapping")
+    @Html.ActionLink("Export", "ExportExcel")
 </p>
 using (Html.BeginForm())
 {
@@ -74,8 +74,6 @@ using (Html.BeginForm())
             <td>
                 @Html.DisplayFor(modelItem => cat.category.Category1)
             </td>
-
-
         }
         
         

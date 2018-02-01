@@ -58,7 +58,7 @@ using (Html.BeginForm())
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "Details", new { id = Model.CompanyID})
 </div>
 
 @section Scripts {

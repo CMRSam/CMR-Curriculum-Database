@@ -22,7 +22,7 @@ namespace CMR_Curriculum_Database.Controllers
             {
                 cat = cat.Where(m => m.Category1.Contains(searchString));
             }
-            return View(cat.ToList());
+            return View(cat.ToList().OrderBy(c => c.Category1));
         }
 
         // GET: categories/Details/5

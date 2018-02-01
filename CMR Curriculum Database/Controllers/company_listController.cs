@@ -32,7 +32,7 @@ namespace CMR_Curriculum_Database.Controllers
                                                  m.Notes.Contains(s));
                 }
             }
-            return View(company.ToList());
+            return View(company.ToList().OrderBy(c => c.Company_Name));
         }
 
         // GET: company_list/Details/5
