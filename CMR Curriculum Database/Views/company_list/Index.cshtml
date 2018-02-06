@@ -37,7 +37,7 @@ using (Html.BeginForm())
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(Html.DisplayFor(modelItem => item.Company_Name).ToHtmlString(), "Details", new { id = item.CompanyID })
+            @Html.ActionLink(item.Company_Name, "Details", new { id = item.CompanyID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Program)

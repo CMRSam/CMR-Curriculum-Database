@@ -7,6 +7,7 @@
 <h2><strong>Content</strong></h2>
 @if(Request.IsAuthenticated)
 {
+    <h4>@Model.Count() resources total</h4>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -38,25 +39,29 @@ using (Html.BeginForm())
         <th>
             Resource Type
         </th>
+        
+        <th>
+            In Revision
+        </th>
         <th>
             Categories
         </th>
-        <th>
         
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+    
         <tr>
         @foreach (var pc in item.parent_course_map)
         {
         <td>
-            @Html.ActionLink(Html.DisplayFor(modelItem => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.parent_course.Parent_Course_ID })
+            @Html.ActionLink(pc.parent_course.Parent_Course_Name, "../parent_course/Details", new { id = pc.parent_course.Parent_Course_ID })
         </td>
         }
         <td>
-            @Html.ActionLink(Html.DisplayFor(modelItem => item.Module_Name___CURRENT).ToHtmlString(), "Details", new { id=item.ContentID })
+            @Html.ActionLink(item.Module_Name___CURRENT, "Details", new { id=item.ContentID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Module_Name___PREVIOUS)
@@ -69,13 +74,15 @@ using (Html.BeginForm())
         <td>
             @Html.DisplayFor(modelItem => item.Resources_Type)
         </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.In_Revision)
+            </td>
         @foreach (var cat in item.category_map)
         {
             <td>
                 @Html.DisplayFor(modelItem => cat.category.Category1)
             </td>
         }
-        
         
     </tr>
 }

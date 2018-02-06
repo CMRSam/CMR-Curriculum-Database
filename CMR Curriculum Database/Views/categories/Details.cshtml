@@ -27,7 +27,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.content.Module_Name___CURRENT).ToHtmlString(), "../content/Details", new { id=item.content.ContentID })
+                    @Html.ActionLink(item.content.Module_Name___CURRENT, "../content/Details", new { id=item.content.ContentID })
                 </td>
             </tr>
         }

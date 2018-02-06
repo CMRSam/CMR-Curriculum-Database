@@ -22,7 +22,7 @@ using (Html.BeginForm())
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(Html.DisplayFor(modelItem => item.Parent_Course_Name).ToHtmlString(), "Details", new {  id = item.Parent_Course_ID })
+            @Html.ActionLink(item.Parent_Course_Name, "Details", new {  id = item.Parent_Course_ID })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Parent_Course_ID }) |
