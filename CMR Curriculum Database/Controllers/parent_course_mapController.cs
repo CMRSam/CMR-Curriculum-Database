@@ -19,7 +19,7 @@ namespace CMR_Curriculum_Database.Controllers
         public ActionResult Index()
         {
             var parent_course_map = db.parent_course_map.Include(p => p.parent_course).Include(p => p.content);
-            return View(parent_course_map.ToList());
+            return View(parent_course_map.OrderBy(item => item.content.Module_Name___CURRENT).ToList());
         }
 
         // GET: parent_course_map/Details/5
@@ -69,15 +69,16 @@ namespace CMR_Curriculum_Database.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Parent_Course_ID,Module_ID")] parent_course_map parent_course_map, int? id)
         {
+            content c = db.content.Find(id);
             if (ModelState.IsValid)
             {
                 db.parent_course_map.Add(parent_course_map);
                 db.SaveChanges();
-                return RedirectToAction("../content/Details/"+id);
+                return RedirectToAction("../content/Index");
             }
 
             ViewBag.Parent_Course_ID = new SelectList(db.parent_courses, "Parent_Course_ID", "Parent_Course_Name", parent_course_map.Parent_Course_ID);
-            ViewBag.Module_ID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", parent_course_map.Module_ID);
+            ViewBag.Module_ID = new SelectList(db.content, "ContentID", "Module_Name___CURRENT", c.ContentID);
             return View();
         }
 

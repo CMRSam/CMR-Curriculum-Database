@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9fc1d4d1c4034f78bce427357755900e" Name="Diagram1" ZoomLevel="73">
+      <Diagram DiagramId="9fc1d4d1c4034f78bce427357755900e" Name="Diagram1" ZoomLevel="58">
         <EntityTypeShape EntityType="curriculumModel.category" Width="1.5" PointX="13.25" PointY="11.25" />
         <EntityTypeShape EntityType="curriculumModel.category_map" Width="1.5" PointX="13.375" PointY="7.5" />
         <EntityTypeShape EntityType="curriculumModel.company_map" Width="1.5" PointX="7.625" PointY="3.125" />
@@ -19,12 +19,12 @@
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_1" />
         <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_2" />
         <EntityTypeShape EntityType="curriculumModel.archived_content" Width="1.5" PointX="18" PointY="4.125" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetroles" Width="1.5" PointX="19.875" PointY="4.625" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserclaims" Width="1.5" PointX="20" PointY="2.5" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserlogins" Width="1.5" PointX="20" PointY="7" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetuserroles" Width="1.5" PointX="22" PointY="9.375" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_aspnetusers" Width="1.5" PointX="21.75" PointY="2.5" />
-        <EntityTypeShape EntityType="curriculumModel.dbo_migrationhistory" Width="1.5" PointX="22.25" PointY="7.125" />
+        <EntityTypeShape EntityType="curriculumModel.aspnetrole" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.aspnetuserclaim" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.aspnetuserlogin" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="curriculumModel.aspnetuserrole" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="curriculumModel.aspnetuser" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="curriculumModel.migrationhistory" Width="1.5" PointX="2.75" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

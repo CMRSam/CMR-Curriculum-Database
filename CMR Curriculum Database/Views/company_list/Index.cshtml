@@ -5,6 +5,10 @@
 }
 
 <h2><strong>Companies/Certificate Programs</strong></h2>
+<h4>@Model.Count() total</h4>
+<p>
+    @Html.ActionLink("Export Company with Programs", "ExportCompanyProgramsExcel")
+</p>
 @if(Request.IsAuthenticated)
 {
 <p>
@@ -14,7 +18,7 @@ using (Html.BeginForm())
 {
     <p>
         Search Content: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" name="search"/>
     </p>
 }
 <table class="table">

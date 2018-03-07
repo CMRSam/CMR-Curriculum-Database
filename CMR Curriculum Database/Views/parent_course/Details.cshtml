@@ -18,7 +18,7 @@
             </th>
         </tr>
 
-        @foreach (var item in Model.parent_course_map)
+        @foreach (var item in Model.parent_course_map.OrderBy(i => i.content.Module_Name___CURRENT))
         {
             <tr>
                 <td>

@@ -27,12 +27,61 @@
           <Property Name="Resource Duration" Type="varchar" MaxLength="255" />
           <Property Name="Level" Type="varchar" MaxLength="50" />
           <Property Name="Last Revision Date" Type="varchar" MaxLength="255" />
-          <Property Name="Related Content" Type="varchar" MaxLength="255" />
+          <Property Name="Pairs Nicely With" Type="varchar" MaxLength="255" />
+          <Property Name="Originated From" Type="longtext" />
           <Property Name="Passing Score changed to 80%" Type="varchar" MaxLength="255" />
           <Property Name="Writer" Type="varchar" MaxLength="255" />
           <Property Name="SME" Type="varchar" MaxLength="255" />
           <Property Name="Chicago Approved" Type="varchar" MaxLength="50" />
           <Property Name="ACPE Module" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="aspnetroles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetuserclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="varchar" MaxLength="255" />
+          <Property Name="ClaimValue" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="aspnetuserlogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+          </Key>
+          <Property Name="LoginProvider" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetuserroles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetusers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="255" />
+          <Property Name="SecurityStamp" Type="varchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" Precision="0" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -89,62 +138,15 @@
           <Property Name="Resource Duration" Type="varchar" MaxLength="255" />
           <Property Name="Level" Type="varchar" MaxLength="50" />
           <Property Name="Last Revision Date" Type="varchar" MaxLength="255" />
-          <Property Name="Related Content" Type="varchar" MaxLength="255" />
+          <Property Name="Pairs Nicely With" Type="varchar" MaxLength="255" />
+          <Property Name="Originated From" Type="longtext" />
           <Property Name="Passing Score changed to 80%" Type="varchar" MaxLength="255" />
           <Property Name="Writer" Type="varchar" MaxLength="255" />
           <Property Name="SME" Type="varchar" MaxLength="255" />
           <Property Name="Chicago Approved" Type="varchar" MaxLength="50" />
           <Property Name="ACPE Module" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="dbo_aspnetroles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dbo_aspnetuserclaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="varchar" MaxLength="255" />
-          <Property Name="ClaimValue" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="dbo_aspnetuserlogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-          </Key>
-          <Property Name="LoginProvider" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dbo_aspnetuserroles">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="varchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dbo_aspnetusers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="varchar" MaxLength="255" />
-          <Property Name="SecurityStamp" Type="varchar" MaxLength="255" />
-          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" Precision="0" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dbo_migrationhistory">
+        <EntityType Name="migrationhistory">
           <Key>
             <PropertyRef Name="MigrationId" />
           </Key>
@@ -254,17 +256,17 @@
         </Association>
         <EntityContainer Name="curriculumModelStoreContainer">
           <EntitySet Name="archived_content" EntityType="Self.archived_content" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="aspnetuserclaims" EntityType="Self.aspnetuserclaims" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="aspnetuserlogins" EntityType="Self.aspnetuserlogins" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="aspnetuserroles" EntityType="Self.aspnetuserroles" Schema="curriculum" store:Type="Tables" />
+          <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="category_map" EntityType="Self.category_map" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="company map" EntityType="Self.company map" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="company_list" EntityType="Self.company_list" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="content" EntityType="Self.content" Schema="curriculum" store:Type="Tables" />
-          <EntitySet Name="dbo_aspnetroles" EntityType="Self.dbo_aspnetroles" Schema="curriculum" Table="dbo.aspnetroles" store:Type="Tables" />
-          <EntitySet Name="dbo_aspnetuserclaims" EntityType="Self.dbo_aspnetuserclaims" Schema="curriculum" Table="dbo.aspnetuserclaims" store:Type="Tables" />
-          <EntitySet Name="dbo_aspnetuserlogins" EntityType="Self.dbo_aspnetuserlogins" Schema="curriculum" Table="dbo.aspnetuserlogins" store:Type="Tables" />
-          <EntitySet Name="dbo_aspnetuserroles" EntityType="Self.dbo_aspnetuserroles" Schema="curriculum" Table="dbo.aspnetuserroles" store:Type="Tables" />
-          <EntitySet Name="dbo_aspnetusers" EntityType="Self.dbo_aspnetusers" Schema="curriculum" Table="dbo.aspnetusers" store:Type="Tables" />
-          <EntitySet Name="dbo_migrationhistory" EntityType="Self.dbo_migrationhistory" Schema="curriculum" Table="dbo.migrationhistory" store:Type="Tables" />
+          <EntitySet Name="migrationhistory" EntityType="Self.migrationhistory" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="parent course" EntityType="Self.parent course" Schema="curriculum" store:Type="Tables" />
           <EntitySet Name="parent_course_map" EntityType="Self.parent_course_map" Schema="curriculum" store:Type="Tables" />
           <AssociationSet Name="category_map_ibfk_1" Association="Self.category_map_ibfk_1">
@@ -329,12 +331,12 @@
             <End Role="parent_course_map" EntitySet="parent_course_map" />
           </AssociationSet>
           <EntitySet Name="archived_content" EntityType="curriculumModel.archived_content" />
-          <EntitySet Name="dbo_aspnetroles" EntityType="curriculumModel.dbo_aspnetroles" />
-          <EntitySet Name="dbo_aspnetuserclaims" EntityType="curriculumModel.dbo_aspnetuserclaims" />
-          <EntitySet Name="dbo_aspnetuserlogins" EntityType="curriculumModel.dbo_aspnetuserlogins" />
-          <EntitySet Name="dbo_aspnetuserroles" EntityType="curriculumModel.dbo_aspnetuserroles" />
-          <EntitySet Name="dbo_aspnetusers" EntityType="curriculumModel.dbo_aspnetusers" />
-          <EntitySet Name="dbo_migrationhistory" EntityType="curriculumModel.dbo_migrationhistory" />
+          <EntitySet Name="aspnetroles" EntityType="curriculumModel.aspnetrole" />
+          <EntitySet Name="aspnetuserclaims" EntityType="curriculumModel.aspnetuserclaim" />
+          <EntitySet Name="aspnetuserlogins" EntityType="curriculumModel.aspnetuserlogin" />
+          <EntitySet Name="aspnetuserroles" EntityType="curriculumModel.aspnetuserrole" />
+          <EntitySet Name="aspnetusers" EntityType="curriculumModel.aspnetuser" />
+          <EntitySet Name="migrationhistories" EntityType="curriculumModel.migrationhistory" />
           </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -372,7 +374,7 @@
           <Property Name="Company_Name" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Delivery_Method" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Program" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
-          <Property Name="Notes" Type="String" MaxLength="79" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="company_map" Relationship="curriculumModel.FKCompany" FromRole="company_list" ToRole="company_map" />
         </EntityType>
         <EntityType Name="content">
@@ -397,7 +399,6 @@
           <Property Name="Resource_Duration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Last_Revision_Date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Related_Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Passing_Score_changed_to_80_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Writer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
@@ -406,6 +407,8 @@
           <NavigationProperty Name="category_map" Relationship="curriculumModel.category_map_ibfk_1" FromRole="content" ToRole="category_map" />
           <NavigationProperty Name="company_map" Relationship="curriculumModel.company_map_ibfk_1" FromRole="content" ToRole="company_map" />
           <NavigationProperty Name="parent_course_map" Relationship="curriculumModel.parent_course_map_ibfk_1" FromRole="content" ToRole="parent_course_map" />
+          <Property Name="Pairs_Nicely_With" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Originated_From" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="parent_course">
           <Key>
@@ -531,21 +534,22 @@
           <Property Name="Resource_Duration" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Last_Revision_Date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Related_Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Passing_Score_changed_to_80_" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Writer" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="SME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Chicago_Approved" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ACPE_Module" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Pairs_Nicely_With" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Originated_From" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_aspnetroles">
+        <EntityType Name="aspnetrole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_aspnetuserclaims">
+        <EntityType Name="aspnetuserclaim">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -554,7 +558,7 @@
           <Property Name="ClaimType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ClaimValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_aspnetuserlogins">
+        <EntityType Name="aspnetuserlogin">
           <Key>
             <PropertyRef Name="LoginProvider" />
           </Key>
@@ -562,14 +566,14 @@
           <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_aspnetuserroles">
+        <EntityType Name="aspnetuserrole">
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_aspnetusers">
+        <EntityType Name="aspnetuser">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -586,7 +590,7 @@
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dbo_migrationhistory">
+        <EntityType Name="migrationhistory">
           <Key>
             <PropertyRef Name="MigrationId" />
           </Key>
@@ -641,12 +645,13 @@
           <EntitySetMapping Name="contents">
             <EntityTypeMapping TypeName="curriculumModel.content">
               <MappingFragment StoreEntitySet="content">
+                <ScalarProperty Name="Originated_From" ColumnName="Originated From" />
+                <ScalarProperty Name="Pairs_Nicely_With" ColumnName="Pairs Nicely With" />
                 <ScalarProperty Name="ACPE_Module" ColumnName="ACPE Module" />
                 <ScalarProperty Name="Chicago_Approved" ColumnName="Chicago Approved" />
                 <ScalarProperty Name="SME" ColumnName="SME" />
                 <ScalarProperty Name="Writer" ColumnName="Writer" />
                 <ScalarProperty Name="Passing_Score_changed_to_80_" ColumnName="Passing Score changed to 80%" />
-                <ScalarProperty Name="Related_Content" ColumnName="Related Content" />
                 <ScalarProperty Name="Last_Revision_Date" ColumnName="Last Revision Date" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Resource_Duration" ColumnName="Resource Duration" />
@@ -688,12 +693,13 @@
           <EntitySetMapping Name="archived_content">
             <EntityTypeMapping TypeName="curriculumModel.archived_content">
               <MappingFragment StoreEntitySet="archived_content">
+                <ScalarProperty Name="Originated_From" ColumnName="Originated From" />
+                <ScalarProperty Name="Pairs_Nicely_With" ColumnName="Pairs Nicely With" />
                 <ScalarProperty Name="ACPE_Module" ColumnName="ACPE Module" />
                 <ScalarProperty Name="Chicago_Approved" ColumnName="Chicago Approved" />
                 <ScalarProperty Name="SME" ColumnName="SME" />
                 <ScalarProperty Name="Writer" ColumnName="Writer" />
                 <ScalarProperty Name="Passing_Score_changed_to_80_" ColumnName="Passing Score changed to 80%" />
-                <ScalarProperty Name="Related_Content" ColumnName="Related Content" />
                 <ScalarProperty Name="Last_Revision_Date" ColumnName="Last Revision Date" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Resource_Duration" ColumnName="Resource Duration" />
@@ -715,17 +721,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_aspnetroles">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_aspnetroles">
-              <MappingFragment StoreEntitySet="dbo_aspnetroles">
+          <EntitySetMapping Name="aspnetroles">
+            <EntityTypeMapping TypeName="curriculumModel.aspnetrole">
+              <MappingFragment StoreEntitySet="aspnetroles">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_aspnetuserclaims">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_aspnetuserclaims">
-              <MappingFragment StoreEntitySet="dbo_aspnetuserclaims">
+          <EntitySetMapping Name="aspnetuserclaims">
+            <EntityTypeMapping TypeName="curriculumModel.aspnetuserclaim">
+              <MappingFragment StoreEntitySet="aspnetuserclaims">
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
                 <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -733,26 +739,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_aspnetuserlogins">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_aspnetuserlogins">
-              <MappingFragment StoreEntitySet="dbo_aspnetuserlogins">
+          <EntitySetMapping Name="aspnetuserlogins">
+            <EntityTypeMapping TypeName="curriculumModel.aspnetuserlogin">
+              <MappingFragment StoreEntitySet="aspnetuserlogins">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_aspnetuserroles">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_aspnetuserroles">
-              <MappingFragment StoreEntitySet="dbo_aspnetuserroles">
+          <EntitySetMapping Name="aspnetuserroles">
+            <EntityTypeMapping TypeName="curriculumModel.aspnetuserrole">
+              <MappingFragment StoreEntitySet="aspnetuserroles">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_aspnetusers">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_aspnetusers">
-              <MappingFragment StoreEntitySet="dbo_aspnetusers">
+          <EntitySetMapping Name="aspnetusers">
+            <EntityTypeMapping TypeName="curriculumModel.aspnetuser">
+              <MappingFragment StoreEntitySet="aspnetusers">
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -768,9 +774,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_migrationhistory">
-            <EntityTypeMapping TypeName="curriculumModel.dbo_migrationhistory">
-              <MappingFragment StoreEntitySet="dbo_migrationhistory">
+          <EntitySetMapping Name="migrationhistories">
+            <EntityTypeMapping TypeName="curriculumModel.migrationhistory">
+              <MappingFragment StoreEntitySet="migrationhistory">
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />

@@ -23,7 +23,7 @@
             </th>
         </tr>
 
-        @foreach (var item in Model.category_map)
+        @foreach (var item in Model.category_map.OrderBy(i => i.content.Module_Name___CURRENT))
         {
             <tr>
                 <td>

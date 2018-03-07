@@ -22,7 +22,7 @@
             Parent Course:
         </dt>
         <dd>
-            @Html.ActionLink(Html.DisplayFor(model => pc.parent_course.Parent_Course_Name).ToHtmlString(), "../parent_course/Details", new { id = pc.Parent_Course_ID }) | @Html.ActionLink("Change", "../parent_course_map/Edit", new { id = pc.ID })
+            @Html.ActionLink(pc.parent_course.Parent_Course_Name, "../parent_course/Details", new { id = pc.Parent_Course_ID }) | @Html.ActionLink("Change", "../parent_course_map/Edit", new { id = pc.ID })
         </dd>
         }
         <dt>
@@ -46,7 +46,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Objectives)
+            @Html.TextAreaFor(model => model.Objectives, new { @Style = "height:200px; Width:100%; border:none;", @readonly = "readonly" })
         </dd>
 
         <dt>
@@ -154,16 +154,24 @@
         </dd>
 
         <dt>
-            Related Content:
+            Pairs Nicely With:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Related_Content)
+            @Html.DisplayFor(model => model.Pairs_Nicely_With)
         </dd>
 
         <dt>
             Passing Score Changed to 80:
         </dt>
+
+        <dt>
+            Originated from:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Originated_From)
+        </dd>
 
         <dd>
             @Html.DisplayFor(model => model.Passing_Score_changed_to_80_)
@@ -215,7 +223,7 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.category.Category1).ToHtmlString(), "../categories/Details", new { id = item.CategoryID })
+                    @Html.ActionLink(item.category.Category1, "../categories/Details", new { id = item.CategoryID })
                 </td>
                 <td>
                     @Html.ActionLink("Remove", "../category_map/Delete", new { id = item.ID, contentID = Model.ContentID })

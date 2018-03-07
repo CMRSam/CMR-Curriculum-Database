@@ -337,6 +337,21 @@
     <Compile Include="Models\archived_content.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\aspnetrole.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuser.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuserclaim.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuserlogin.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\aspnetuserrole.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\category.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
@@ -368,26 +383,11 @@
     <Compile Include="Models\content.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbo_aspnetroles.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbo_aspnetuserclaims.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbo_aspnetuserlogins.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbo_aspnetuserroles.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbo_aspnetusers.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbo_migrationhistory.cs">
-      <DependentUpon>CMRCurriculum.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\migrationhistory.cs">
+      <DependentUpon>CMRCurriculum.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\parent_course.cs">
       <DependentUpon>CMRCurriculum.tt</DependentUpon>
     </Compile>

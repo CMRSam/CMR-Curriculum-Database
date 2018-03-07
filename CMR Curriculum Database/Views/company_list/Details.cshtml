@@ -5,6 +5,9 @@
 }
 
 <h2><strong>@Html.DisplayFor(model => model.Company_Name)</strong></h2><h4>   @Model.company_map.Count() modules</h4>
+<p>
+    @Html.ActionLink("Export", "../content/ExportCompanyExcel", new { companyID = Model.CompanyID })
+</p>
 
 @if(Request.IsAuthenticated)
 {
@@ -43,6 +46,9 @@
     <table class="table">
         <tr>
             <th>
+                Parent Course
+            </th>
+            <th>
                 Content Title
             </th>
             <th>
@@ -50,9 +56,15 @@
             </th>
         </tr>
 
-        @foreach (var item in Model.company_map)
+        @foreach (var item in Model.company_map.OrderBy(i => i.content.Module_Name___CURRENT))
         {
             <tr>
+                @foreach (var content in item.content.parent_course_map)
+                {
+                <td>
+                    @Html.ActionLink(content.parent_course.Parent_Course_Name, "../parent_course/Details", new { id = content.parent_course.Parent_Course_ID })
+                </td>
+                }
                 <td>
                     @Html.ActionLink(item.content.Module_Name___CURRENT, "../content/Details", new { id=item.content.ContentID})
                 </td>
