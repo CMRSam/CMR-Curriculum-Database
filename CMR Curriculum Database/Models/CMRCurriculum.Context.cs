@@ -25,19 +25,19 @@ namespace CMR_Curriculum_Database.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<category> categories { get; set; }
-        public virtual DbSet<category_map> category_map { get; set; }
         public virtual DbSet<company_map> company_maps { get; set; }
         public virtual DbSet<company_list> company_list { get; set; }
-        public virtual DbSet<content> content { get; set; }
-        public virtual DbSet<parent_course> parent_courses { get; set; }
-        public virtual DbSet<parent_course_map> parent_course_map { get; set; }
-        public virtual DbSet<archived_content> archived_content { get; set; }
         public virtual DbSet<aspnetrole> aspnetroles { get; set; }
         public virtual DbSet<aspnetuserclaim> aspnetuserclaims { get; set; }
         public virtual DbSet<aspnetuserlogin> aspnetuserlogins { get; set; }
         public virtual DbSet<aspnetuserrole> aspnetuserroles { get; set; }
         public virtual DbSet<aspnetuser> aspnetusers { get; set; }
         public virtual DbSet<migrationhistory> migrationhistories { get; set; }
+        public virtual DbSet<category> categories { get; set; }
+        public virtual DbSet<category_map> category_map { get; set; }
+        public virtual DbSet<content> content { get; set; }
+        public virtual DbSet<parent_course> parent_courses { get; set; }
+        public virtual DbSet<parent_course_map> parent_course_map { get; set; }
+        public virtual DbSet<archived_content> archived_content { get; set; }
     }
 }

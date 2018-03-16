@@ -10,6 +10,7 @@ using CMR_Curriculum_Database.Models;
 using System.Text;
 using System.Reflection;
 using System.IO;
+using PagedList;
 
 namespace CMR_Curriculum_Database.Controllers
 {
@@ -18,21 +19,27 @@ namespace CMR_Curriculum_Database.Controllers
         private curriculumEntities db = new curriculumEntities();
 
         // GET: contents
-        public ActionResult Index(string searchString, string sortOrder)
+        public ActionResult Index(string searchString, int ?page)
         {
             char delim = ' ';
+            
+            if (searchString != null)
+            {
+                page = 1;
+            }
 
+            ViewBag.CurrentFilter = searchString;
 
-            ViewBag.ModuleNameParam = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.ParentCourseParam = sortOrder == "Parent_Course_Name" ? "parent_course" : "name";
 
             var content = from m in db.content
                           join pcm in db.parent_course_map on m.ContentID equals pcm.Module_ID
                           join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
                           orderby pc.Parent_Course_Name
                           select m;
-            var parentCourse = from p in db.parent_courses select p;
 
+            //string query = "select * from content inner join parent_course_map on content.ContentID = parent_course_map.Module_ID inner join parent_course on parent_course.Parent_Course_ID = parent_course_map.Parent_Course_Id";
+            //var query = db.content.SqlQuery("select Module Name - CURRENT from content");
+            
             if (!String.IsNullOrEmpty(searchString))
             {
                 string[] searchStringArray = searchString.Split(delim);
@@ -45,17 +52,14 @@ namespace CMR_Curriculum_Database.Controllers
                                              m.Audio_Talent_used.Contains(s) ||
                                              m.Resources_Type.Contains(s));
                 }
-            }
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    content = content.OrderByDescending(c => c.Module_Name___CURRENT);
-                    break;
+                
             }
             
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+
             //content = content.Include(db.parent_courses);
-            return View(content.ToList());
+            return View(content.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: contents/Details/5
@@ -91,7 +95,7 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ContentID,Parent_Course_Name__if_applicable_,Module_Name___CURRENT,Module_Name___PREVIOUS,Introduction,Objectives,Audio_Talent_used,ACTIVE_ON_WEBSITE,Notes,Allowed_for_ASM_,MAIE_Modules,Main_Category_1,Subcategory,Main_Category_2,Subcategory_of_2,Main_Category_3,Sub_of_3,Search_Tagging,Industry_Tagging___FOR_WEBSITE,Resources_Type,Delivered_In_,Resource_Duration,Level__Foundational__Intermediate__Advanced_,Role___Rep,Role___DM,Role___Account_Manager,Training_Planner,In_Revision,Last_Revision_Date,Originated_From,Pairs_Nicely_With,Passing_Score_changed_to_80_,Writer,SME,ACPE_Module,Chicago_Approved")] content content, int? id)
+        public ActionResult Create([Bind(Include = "ContentID,Parent_Course_Name__if_applicable_,Module_Name___CURRENT,Module_Name___PREVIOUS,Introduction,Objectives,Audio_Talent_used,ACTIVE_ON_WEBSITE,Notes,Allowed_for_ASM_,MAIE_Modules,Main_Category_1,Subcategory,Main_Category_2,Subcategory_of_2,Main_Category_3,Sub_of_3,Search_Tagging,Industry_Tagging___FOR_WEBSITE,Resources_Type,Delivered_In_,Resource_Duration,Level__Foundational__Intermediate__Advanced_,Role___Rep,Role___DM,Role___Account_Manager,Training_Planner,In_Revision,Last_Revision_Date,Related_Content,Passing_Score_changed_to_80_,Writer,SME,ACPE_Module,Chicago_Approved")] content content, int? id)
         {
             content c = db.content.Find(id);
             if (ModelState.IsValid)
@@ -124,7 +128,7 @@ namespace CMR_Curriculum_Database.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ContentID,Parent_Course_Name__if_applicable_,Module_Name___CURRENT,Module_Name___PREVIOUS,Introduction,Objectives,Audio_Talent_used,ACTIVE_ON_WEBSITE,Notes,Allowed_for_ASM_,MAIE_Modules,Main_Category_1,Subcategory,Main_Category_2,Subcategory_of_2,Main_Category_3,Sub_of_3,Search_Tagging,Industry_Tagging___FOR_WEBSITE,Resources_Type,Delivered_In_,Resource_Duration,Level,Role___Rep,Role___DM,Role___Account_Manager,Training_Planner,In_Revision,Last_Revision_Date,Originiated_From,Pairs_Nicely_With,Passing_Score_changed_to_80_,Writer,SME,ACPE_Module,Chicago_Approved")] content content, int? id)
+        public ActionResult Edit([Bind(Include = "ContentID,Parent_Course_Name__if_applicable_,Module_Name___CURRENT,Module_Name___PREVIOUS,Introduction,Objectives,Audio_Talent_used,ACTIVE_ON_WEBSITE,Notes,Allowed_for_ASM_,MAIE_Modules,Main_Category_1,Subcategory,Main_Category_2,Subcategory_of_2,Main_Category_3,Sub_of_3,Search_Tagging,Industry_Tagging___FOR_WEBSITE,Resources_Type,Delivered_In_,Resource_Duration,Level,Role___Rep,Role___DM,Role___Account_Manager,Training_Planner,In_Revision,Last_Revision_Date,Related_Content,Passing_Score_changed_to_80_,Writer,SME,ACPE_Module,Chicago_Approved")] content content, int? id)
         {
             if (ModelState.IsValid)
             {
@@ -201,8 +205,7 @@ namespace CMR_Curriculum_Database.Controllers
                            Resource_Duration = c.Resource_Duration,
                            Level = c.Level,
                            Last_Revision_Date = c.Last_Revision_Date,
-                           Originated_From = c.Originated_From,
-                           Painrs_Nicely_With = c.Pairs_Nicely_With,
+                           Related_Content = c.Related_Content,
                            Passing_Score_Changed_to_80 = c.Passing_Score_changed_to_80_,
                            Writer = c.Writer,
                            SME = c.SME,
@@ -225,9 +228,10 @@ namespace CMR_Curriculum_Database.Controllers
             //return File(bytes, "application/text", "Catalog.xls");
         }
 
-        public void ExportCompanyExcel(int companyID)
+        public void ExportSearchExcel(int searchID)
         {
             var sb = new StringBuilder();
+            
             var data = from c in db.content
                        join pcm in db.parent_course_map on c.ContentID equals pcm.Module_ID
                        join pc in db.parent_courses on pcm.Parent_Course_ID equals pc.Parent_Course_ID
@@ -235,7 +239,7 @@ namespace CMR_Curriculum_Database.Controllers
                        join categor in db.categories on catmap.CategoryID equals categor.CategoryID
                        join compmap in db.company_maps on c.ContentID equals compmap.ContentID
                        join comp in db.company_list on compmap.CompanyID equals comp.CompanyID
-                       where comp.CompanyID == companyID
+                       where comp.CompanyID == searchID
                        select new
                        {
                            Parent_Course = pc.Parent_Course_Name,
@@ -257,14 +261,14 @@ namespace CMR_Curriculum_Database.Controllers
                            Resource_Duration = c.Resource_Duration,
                            Level = c.Level,
                            Last_Revision_Date = c.Last_Revision_Date,
-                           Originated_From = c.Originated_From,
-                           Painrs_Nicely_With = c.Pairs_Nicely_With,
+                           Related_Content = c.Related_Content,
                            Passing_Score_Changed_to_80 = c.Passing_Score_changed_to_80_,
                            Writer = c.Writer,
                            SME = c.SME,
                            Chicago_Approved = c.Chicago_Approved,
                            ACPE_Module = c.ACPE_Module
                        };
+            
             var list = data.ToList();
             var grid = new System.Web.UI.WebControls.GridView();
             grid.DataSource = list;
@@ -304,8 +308,7 @@ namespace CMR_Curriculum_Database.Controllers
                 Resource_Duration = c.Resource_Duration,
                 Level = c.Level,
                 Last_Revision_Date = c.Last_Revision_Date,
-                Originated_From = c.Originated_From,
-                Pairs_Nicely_With = c.Pairs_Nicely_With,
+                Related_Content = c.Related_Content,
                 Passing_Score_changed_to_80_ = c.Passing_Score_changed_to_80_,
                 Writer = c.Writer,
                 SME = c.SME,

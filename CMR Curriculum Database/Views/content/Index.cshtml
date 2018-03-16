@@ -1,4 +1,7 @@
-﻿@model IEnumerable<CMR_Curriculum_Database.Models.content>
+﻿
+@model PagedList.IPagedList<CMR_Curriculum_Database.Models.content>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @using Microsoft.AspNet.Identity
 
 @{
@@ -88,6 +91,11 @@ using (Html.BeginForm())
 }
 
 </table>
+<br />
+<p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new { page }))</p>
 }
 else
 {

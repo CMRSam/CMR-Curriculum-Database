@@ -5,26 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9fc1d4d1c4034f78bce427357755900e" Name="Diagram1" ZoomLevel="58">
-        <EntityTypeShape EntityType="curriculumModel.category" Width="1.5" PointX="13.25" PointY="11.25" />
-        <EntityTypeShape EntityType="curriculumModel.category_map" Width="1.5" PointX="13.375" PointY="7.5" />
         <EntityTypeShape EntityType="curriculumModel.company_map" Width="1.5" PointX="7.625" PointY="3.125" />
         <EntityTypeShape EntityType="curriculumModel.company_list" Width="1.5" PointX="3.875" PointY="3.625" />
-        <EntityTypeShape EntityType="curriculumModel.content" Width="1.5" PointX="9.75" PointY="5.75" />
-        <EntityTypeShape EntityType="curriculumModel.parent_course" Width="1.5" PointX="6.625" PointY="12.25" />
-        <EntityTypeShape EntityType="curriculumModel.parent_course_map" Width="1.5" PointX="6.625" PointY="9" />
-        <AssociationConnector Association="curriculumModel.category_map_ibfk_2" />
-        <AssociationConnector Association="curriculumModel.category_map_ibfk_1" />
-        <AssociationConnector Association="curriculumModel.company_map_ibfk_1" />
         <AssociationConnector Association="curriculumModel.FKCompany" />
-        <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_1" />
-        <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_2" />
-        <EntityTypeShape EntityType="curriculumModel.archived_content" Width="1.5" PointX="18" PointY="4.125" />
         <EntityTypeShape EntityType="curriculumModel.aspnetrole" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="curriculumModel.aspnetuserclaim" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="curriculumModel.aspnetuserlogin" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="curriculumModel.aspnetuserrole" Width="1.5" PointX="4.75" PointY="0.75" />
         <EntityTypeShape EntityType="curriculumModel.aspnetuser" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="curriculumModel.migrationhistory" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="curriculumModel.category" Width="1.5" PointX="5.375" PointY="15.375" />
+        <EntityTypeShape EntityType="curriculumModel.category_map" Width="1.5" PointX="7.625" PointY="6.125" />
+        <EntityTypeShape EntityType="curriculumModel.content" Width="1.5" PointX="5.375" PointY="7" />
+        <EntityTypeShape EntityType="curriculumModel.parent_course" Width="1.5" PointX="5.375" PointY="18.375" />
+        <EntityTypeShape EntityType="curriculumModel.parent_course_map" Width="1.5" PointX="7.625" PointY="9.125" />
+        <AssociationConnector Association="curriculumModel.category_map_ibfk_2" />
+        <AssociationConnector Association="curriculumModel.category_map_ibfk_1" />
+        <AssociationConnector Association="curriculumModel.company_map_ibfk_2" />
+        <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_1" />
+        <AssociationConnector Association="curriculumModel.parent_course_map_ibfk_2" />
+        <EntityTypeShape EntityType="curriculumModel.archived_content" Width="1.5" PointX="10.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

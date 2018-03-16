@@ -6,7 +6,7 @@
 
 <h2><strong>@Html.DisplayFor(model => model.Company_Name)</strong></h2><h4>   @Model.company_map.Count() modules</h4>
 <p>
-    @Html.ActionLink("Export", "../content/ExportCompanyExcel", new { companyID = Model.CompanyID })
+    @Html.ActionLink("Export", "../content/ExportSearchExcel", new { searchID = Model.CompanyID, whereString = "company" })
 </p>
 
 @if(Request.IsAuthenticated)

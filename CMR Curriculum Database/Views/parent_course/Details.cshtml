@@ -6,6 +6,9 @@
 
 <h2><strong>@Html.DisplayFor(model => model.Parent_Course_Name)</strong></h2>
 <h4>   @Model.parent_course_map.Count() modules</h4>
+<p>
+    @Html.ActionLink("Export", "../content/ExportSearchExcel", new { searchID = Model.Parent_Course_ID, whereString = "parentCourse"  })
+</p>
 @if (Request.IsAuthenticated)
 {
     @Html.ActionLink("Edit", "Edit", new { id = Model.Parent_Course_ID })
