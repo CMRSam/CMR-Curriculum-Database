@@ -59,7 +59,7 @@ namespace CMR_Curriculum_Database.Controllers
             int pageNumber = (page ?? 1);
 
             //content = content.Include(db.parent_courses);
-            return View(content.ToPagedList(pageNumber, pageSize));
+            return View(content.AsNoTracking().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: contents/Details/5
